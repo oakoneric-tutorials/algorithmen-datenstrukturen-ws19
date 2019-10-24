@@ -1,0 +1,306 @@
+% This work is licensed under the Creative Commons
+% Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy
+% of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/ or
+% send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+% (c) Eric Kunze, 2019
+
+% inspired by Henry Haustein, Daniel Graeveling
+% https://github.com/henrydatei/TUD_MATH_BA
+
+\ProvidesPackage{mathoperatorsMathTUD}
+
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{scalerel,stackengine}
+\RequirePackage{aligned-overset}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                NEW MATH COMMANDS AND OPERATORS                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% new math commands
+
+\DeclareMathSymbol{*}{\mathbin}{symbols}{"01}
+
+% >> special characters
+\newcommand{\quer}[1]{\overline{#1}}
+\newcommand{\schlange}[1]{\widetilde{#1}}
+\newcommand{\dach}[1]{\widehat{#1}}
+
+\renewcommand{\epsilon}{\varepsilon}
+%\let\oldphi\phi
+\renewcommand{\phi}{\varphi}
+%\renewcommand{\varphi}{\oldphi}
+
+\undef\mit
+\newcommand*{\mit}{\text{ mit }}
+\newcommand*{\und}{\text{ und }}
+\newcommand*{\bzw}{\text{ bzw. }}
+\newcommand*{\bei}{\text{ bei }}
+
+\newcommand{\brackets}[1]{\left( #1 \right)}
+\newcommand{\klammer}[1]{\left( #1 \right)}
+\newcommand{\sqbrackets}[1]{\left\{ #1 \right\}}
+
+% >> sets and mappings
+\newcommand{\menge}[1]{\left\{ #1 \right\}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\card}[1]{\abs{#1}}
+\newcommand{\ohne}[1]{\setminus}
+\newcommand{\ohneNull}{\setminus \menge{0}}
+\newcommand{\pows}[1]{\mathcal{P}\left( #1 \right)}
+
+\newcommand{\N}{\mathbb{N}}		% natural numbers
+\newcommand{\Z}{\mathbb{Z}}		% integers
+\newcommand{\Q}{\mathbb{Q}}     % rational numbers
+\newcommand{\R}{\mathbb{R}}		% real numbers
+\newcommand{\Rn}{\mathbb{R}^n}  % IR^n
+\newcommand{\Rm}{\mathbb{R}^m}  % IR^m
+\newcommand{\Rd}{\mathbb{R}^d}  % IR^d
+\undef{\C}
+\newcommand{\C}{\mathbb{C}}		% complex numbers
+\newcommand{\K}{\mathbb{K}}     % any field (real or complex)
+\newcommand{\F}{\mathbb{F}}     % (prime) field
+
+% % Abbildungen mit Namen, einzeilig
+%\newcommand{\abb}[3]{#1 \colon #2 \to #3}
+\NewDocumentCommand{\abb}{ m m O{} m}{#1 \colon #2 \to_{#3} #4}
+
+% Abbildungen mit Namen, zweizeilig
+\newcommand{\bigabb}[5]{#1 \colon \left\lbrace%
+	\begin{array}{rcl}%
+		#2 & \to & #3 \\%
+		#4 & \mapsto & #5%
+	\end{array}%
+	\right.}
+%
+% Abbildungen ohne Namen, zweizeilig
+\newcommand{\bigabbnoname}[4]{\left\lbrace%
+	\begin{array}{rcl}%
+		#1 & \to & #2 \\%
+		#3 & \mapsto & #4%
+	\end{array}%
+	\right.}
+
+% >> logic
+\newcommand{\follows}{\ensuremath{\enskip \Rightarrow \enskip}}                 % =>
+\newcommand{\equivalent}{\ensuremath{\enskip \Leftrightarrow \enskip}}          % <=>
+\newcommand{\defequiv}{\ensuremath{\enskip \mathrel{:\Leftrightarrow}} \enskip} % :<=>
+\newcommand{\defeq}{\ensuremath{\mathrel{:=}}}                                  % :=
+\newcommand{\defqe}{\ensuremath{\mathrel{=:}}}                                  % =:
+
+% >> linear algebra - vector spaces
+\newcommand{\basisB}{\mathcal{B}}                   % cal symbol for basis b
+\newcommand{\darstMat}[2]{M_{\mathcal{#1}} (#2)}    % first parameter: basis, second parameter: mapping symbol
+\newcommand{\MBf}{\darstMat{\basisB}{f}}
+\newcommand{\one}{\mathbbm{1}}                      % unitary matrix
+\newcommand{\isomorph}{\mathrel{\cong}}
+\newcommand{\erz}[1]{\langle #1 \rangle}            % generating system
+\newcommand{\scal}[2]{\left\langle #1\, ,\, #2 \right\rangle}   % scalar product
+\newcommand{\transpose}[1]{\left( #1 \right)^{\top}}            % transpose symbol with (***)
+\newcommand{\trans}[1]{#1^{\top}}                               % transpose symbol without (***)
+
+% >> groups / rings / fields
+\newcommand{\normalteiler}{\mathrel{\trianglelefteqslant}}
+\newcommand{\nichtnormal}{\mathrel{\ntrianglelefteqslant}}
+\newcommand{\echtnormal}{\mathrel{\vartriangleleft}}
+
+\newcommand{\ideal}{\mathrel{\trianglelefteqslant}}
+\newcommand{\nichtideal}{\mathrel{\ntrianglelefteqslant}}
+\newcommand{\echtideal}{\mathrel{\vartriangleleft}}
+
+\newcommand{\einheit}[1]{{#1}^{\times}} % Einheiten
+\newcommand{\Rx}{\einheit{R}}           % Einheiten Ring
+\newcommand{\Kx}{\einheit{K}}			% Einheiten Körper
+
+\NewDocumentCommand{\polynom}{O{R} O{X}}{#1 \left[ #2 \right]}
+% following commands just for compatibility
+\newcommand{\polynomring}[2]{#1 \left[ #2 \right]}  % Polynomring *[*]
+%\newcommand{\polynom}[1]{\polynomring{#1}{X}} % Polynomring *[X]
+\newcommand{\polynomR}{\polynom{R}}   % Polynomring R[X]
+% in older documents insert 
+% \renewcommand{\polynom}[1]{#1 $\left[ X \right]$}
+% for old \polynom-command
+
+
+\newcommand{\MinPol}[2]{\Minpol\left( #1 \mathrel{|} #2\right)}
+\newcommand{\Sp}[1][L \mid K]{\Spur_{#1}}
+\newcommand{\No}[1][L \mid K]{\Norm_{#1}}
+
+% >> number theory
+\newcommand{\teilt}{\mathrel{\mid}}
+\newcommand{\teiltnicht}{\mathrel{\nmid}}
+\newcommand{\rest}[1]{\Z / #1 \Z}           % Restklassen Z/(*)Z
+
+% >> metric spaces
+\newcommand{\folge}[2][]{\left\{ #2 \right\}_{#1}}          % sequence (*)_*
+\newcommand{\dist}[2]{\mathrm{d} \! \left( #1 , #2 \right)} % d(*,*)
+\newcommand{\abs}[1]{\left| #1 \right|}                     % |*|
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}          % ||*||
+
+% >> differentiation
+\newcommand{\partdiff}[1]{\frac{\partial}{\partial #1 }}
+\newcommand{\ableitung}[1]{\frac{\mathrm{d}}{\mathrm{d} #1 }}
+\undef\d
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\diffskip}[1]{\enskip \mathrm{d}#1}
+\newcommand{\dx}{\diffskip{x}}
+\newcommand{\dy}{\diffskip{y}}
+\newcommand{\dz}{\diffskip{z}}
+\newcommand{\da}{\diffskip{a}}
+
+% >> integration
+\newcommand{\Lint}{\mathcal{L}}
+
+% >> topology
+\newcommand{\rand}{\partial}
+
+% >> measure theory
+\newcommand{\borel}[1]{\mathcal{B}(#1)}
+
+% >> numerical mathematics
+
+% >> stochastic
+\undef\P
+\newcommand{\P}{\mathbb{P}}
+\newcommand{\ereignisF}{\mathcal{F}}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\EW}[1][X]{\ensuremath{\E \left[ #1 \right]}}
+\newcommand{\Varianz}{\mathbb{V}\mathrm{ar}}
+\newcommand{\Var}[1][X]{\ensuremath{\Varianz \left( #1 \right)}}
+\newcommand{\Covarianz}{\mathbb{C}\mathrm{ov}}
+\newcommand{\Cov}[2]{\ensuremath{\Covarianz \left( #1 , #2 \right)}}
+\newcommand{\Correlation}{\mathbb{C}\mathrm{orr}}
+\newcommand{\Corr}[2]{\ensuremath{\Correlation \left( #1 , #2 \right)}}
+\newcommand{\Normal}{\mathcal{N}}
+
+\newcommand{\disteq}{\mathrel{\overset{\mathrm{d}}{=}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% math operators
+
+%%%%%% A
+\DeclareMathOperator{\Aff}{Aff}     % Affine
+\DeclareMathOperator{\Aut}{Aut}     % Automorphism
+\DeclareMathOperator{\Abb}{Abb}     % Abbildung
+
+%%%%%% B
+\DeclareMathOperator{\Bernoulli}{Bernoulli} % bernoulli distribution
+\DeclareMathOperator{\Bil}{Bil}     % bilinear mapping
+\DeclareMathOperator{\Bin}{Bin}     % binomial distribution
+
+%%%%%% C
+\DeclareMathOperator{\charak}{char} % characteristic
+\DeclareMathOperator{\cl}{cl}       % closure
+\DeclareMathOperator{\cond}{cond}   % condition of a matrix/algorithm
+\DeclareMathOperator{\cdiff}{C}     % stetig differenzierbare Abbildungen
+
+%%%%%% D
+\DeclareMathOperator{\diam}{diam}   % Diameter of a set
+\DeclareMathOperator{\discr}{discr} % discriminant of a polynom
+\undef\div
+\DeclareMathOperator{\div}{div}     % Divergence
+\DeclareMathOperator{\diag}{diag}   % Diagonal matrix
+
+%%%%%% E
+\DeclareMathOperator{\Eig}{Eig}     % Eigenspace
+\DeclareMathOperator{\End}{End}     % Endomorphism
+\DeclareMathOperator{\eps}{eps}     % Maschinengenauigkeit
+\DeclareMathOperator{\Exp}{Exp}     % exponential distribution
+\DeclareMathOperator{\ext}{ext}     % Exterior
+\DeclareMathOperator{\Ext}{ext}     % 2nd time?
+
+%%%%%% F
+\DeclareMathOperator{\Fix}{Fix}     % Fix-points for group theory
+
+%%%%%% G
+\DeclareMathOperator{\Gal}{Gal}     % galois group
+\DeclareMathOperator{\GammaDist}{Gamma} % gamma distribution
+\DeclareMathOperator{\Geom}{Geom}   % geometric distribution
+\DeclareMathOperator{\ggT}{ggT}     % Größter gemeinsamer Teiler (gcd)
+\DeclareMathOperator{\GL}{GL}       % General Linear Group
+\DeclareMathOperator{\graph}{graph} % Graph
+\DeclareMathOperator{\grad}{grad}   % Gradient
+
+%%%%%% H
+\DeclareMathOperator{\Hom}{Hom}     % family of Homomorphisms
+\DeclareMathOperator{\Hau}{Hau}     % Hauptraum (generalized Eigenspace)
+\DeclareMathOperator{\Hyper}{Hyper} % hypergeometric distribution
+
+%%%%%% IJK
+\DeclareMathOperator{\Image}{Im}    % Image
+\DeclareMathOperator{\Inn}{Inn}     % Inner autommorphism
+\DeclareMathOperator{\inn}{int}     % Set of inner points
+\DeclareMathOperator{\Int}{int}     % 2nd time
+\DeclareMathOperator{\id}{id} %     Identity
+
+\DeclareMathOperator{\Ker}{Ker}     % kernel of a mapping
+\DeclareMathOperator{\kgV}{kgV}     % kleinste gemeinsamer Teiler (lcd)
+
+%%%%%% LMN
+\DeclareMathOperator{\Lin}{L}       % lineare Abbildungen
+\DeclareMathOperator{\LC}{LC}       % Leitkoeffizient
+
+\DeclareMathOperator{\Mat}{Mat}         % Matrix
+\DeclareMathOperator{\Minpol}{MinPol}   % Minimalpolynon
+\DeclareMathOperator{\Multi}{Multi}     % multinomial distribution
+
+\DeclareMathOperator{\negBin}{negBin}   % negative binomial distribution
+\DeclareMathOperator{\Norm}{N}          % norm (algebra)
+\DeclareMathOperator{\normalenraum}{N}  % Normalenraum
+\DeclareMathOperator{\normalisator}{N}  % Mormalisator
+
+
+%%%%%% OPQ
+\DeclareMathOperator{\ord}{ord}     % Order of a group
+\DeclareMathOperator{\Orth}{O}      % Orthogonal Group
+\DeclareMathOperator{\Out}{Out}     % Outer Automorphism
+
+\DeclareMathOperator{\Poisson}{Poisson} % poisson distribution
+\DeclareMathOperator{\pr}{pr}           % Projection
+
+\DeclareMathOperator{\Quot}{Quot}   % Quotient
+\DeclareMathOperator{\quot}{Quot}   % Abwärtskompatibilität
+
+%%%%%% R
+\DeclareMathOperator{\rd}{rd}       % ?
+\DeclareMathOperator{\rk}{rk}       % Rank of a matrix
+\DeclareMathOperator{\rot}{rot}     % Rotation (Curl)
+\DeclareMathOperator{\rang}{rang}   % Matrix Rank
+
+%%%%%% S
+\DeclareMathOperator{\sgn}{sgn}     % Signum function
+\DeclareMathOperator{\SL}{SL}       % Special Linear Group
+\DeclareMathOperator{\SO}{SO}       % Special Orthogonal Group
+\DeclareMathOperator{\Span}{span}   % Span
+\DeclareMathOperator{\Spur}{Sp}     % spur (algebra)
+\DeclareMathOperator{\SR}{SR}       % Spaltenraum
+\DeclareMathOperator{\Stab}{Stab}   % Stabilizer
+\DeclareMathOperator{\supp}{supp}   % Support
+\DeclareMathOperator{\Syl}{Syl}     % Sylow Group
+\DeclareMathOperator{\Sym}{Sym}     % Symmetric Group
+\DeclareMathOperator{\SU}{SU}       % Special Unitary Group
+
+%%%%%% T
+\DeclareMathOperator{\tangentialraum}{T} % Tangentialraum
+\DeclareMathOperator{\tr}{tr}       % Trace operator
+\DeclareMathOperator{\Typ}{Typ}     % Type
+\DeclareMathOperator{\typ}{Typ}     % Abwärtskompatibilität
+
+%%%%%% UVW
+\DeclareMathOperator{\UG}{UG}       % Untergruppe (subgroup)
+\DeclareMathOperator{\Ugr}{Ugr}     % Menge der Untergruppen (set of subgroups)
+\DeclareMathOperator{\Uni}{U}       % Unitary Group / uniform distribution
+
+%%%%%% XYZ
+\DeclareMathOperator{\ZR}{ZR}       % Zeilenraum
+\DeclareMathOperator{\zentralisator}{C} % Zentralisator
+\DeclareMathOperator{\zentrum}{Z}   % Zentrum
+\DeclareMathOperator{\Zwk}{Zwk}     % Menge der Zwischenkörper
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF OPERARORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

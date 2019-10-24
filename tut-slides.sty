@@ -1,0 +1,181 @@
+\ProvidesPackage{tut-slides}
+
+\usetheme[titleformat=allcaps]{metropolis}
+%\useoutertheme{TUD}
+\useinnertheme{tud}
+%\usefonttheme{metropolis}
+\usecolortheme{tud}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+%\useoutertheme{frankfurt}
+
+\usepackage{tudscrcolor}
+
+%\renewcommand{\metropolis@colors@dark}{
+%	\setbeamercolor{normal text}{%
+%		fg=black!2,
+%		bg=cddarkblue
+%	}
+%	\usebeamercolor[fg]{normal text}
+%}
+%\renewcommand{\metropolis@colors@light}{
+%	\setbeamercolor{normal text}{%
+%		fg=cddarkblue,
+%		bg=black!2
+%	}
+%}
+
+
+%\setbeamercolor{progress bar}{fg= blue , bg= blue}
+\setbeamercolor{title separator}{ fg= orange , bg= blue }
+%\setbeamercolor{progress bar in section page}{ fg= yellow , bg= blue }
+%\setbeamercolor{normal text}{fg = cddarkblue bg=cddarkblue}
+%\setbeamercolor{normal text}{bg=cddarkblue}
+%\setbeamercolor{background canvas}{bg=cddarkblue}
+%\metroset{background=light}
+\setbeamercolor{normal text}{fg = white, bg = white}
+
+\usepackage[scale=1, default]{opensans}
+\newcommand*{\osfamily}{\fontfamily{fos}\selectfont}
+\DeclareTextFontCommand{\textos}{\osfamily}
+%\usepackage[sfdefault]{FiraSans}
+
+%\defbeamertemplate*{title page}{customized}[1][]
+%{
+%	\usebeamerfont{title}\inserttitle\par
+%	\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}Uebung: \insertsubtitle\par
+%	\bigskip
+%	\usebeamerfont{author}\insertauthor\par
+%	\usebeamerfont{institute}\insertinstitute\par
+%	\usebeamerfont{date}\insertdate\par
+%	\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+%%	\setbeamercolor{background canvas}{blue}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     SET COLOURS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamercolor{normal text}{%
+	fg=cddarkblue,
+	bg=black!2
+}
+
+\setbeamercolor{block body}{use=normal text,fg=normal text.fg,bg=cddarkblue!10}
+%\setbeamercolor{block title}{fg=tudaccent6,bg=tudbase 20}
+\setbeamercolor{block title}{fg=white,bg=cddarkblue}
+
+\setbeamercolor{alerted text}{fg=cdorange}
+\setbeamercolor{block body alerted}{use=normal text,fg=normal text.fg,bg=cdorange!10}
+\setbeamercolor{block title alerted}{fg=white, bg=cdorange}
+
+\setbeamercolor{example text}{fg=cddarkblue}
+\setbeamercolor{block body example}{use=normal text, fg=normal text.fg,bg=cdgray!10}
+\setbeamercolor{block title example}{fg=white,bg=cdgray}
+
+\setbeamercolor{frametitle}{fg = white, bg = cddarkblue}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    NEW TITLEPAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Neugestaltung des Titelblattes ---- ANFANG
+\setbeamertemplate{title page}{
+	\begin{minipage}[t][0.1\paperheight]{\dimexpr0.5\linewidth-\fboxrule-\fboxsep}
+		\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+	\end{minipage}
+	\begin{minipage}[b][0.9\paperheight]{\textwidth}
+		\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+		\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+		\usebeamertemplate*{title separator}
+		\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+		\vspace{1cm}
+		\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+		\ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+		\vfill
+		\vspace*{1mm}
+	\end{minipage}
+}
+
+\setbeamertemplate{title graphic}{
+	\vbox to 0pt {
+		\vspace*{2em}
+		\inserttitlegraphic%
+	}%
+	\nointerlineskip%
+}
+\setbeamertemplate{title}{
+	\raggedright%
+	\vspace{2.5cm}
+	\linespread{1.0}%
+	\inserttitle%
+	\par%
+	\vspace*{0.5em}
+}
+\setbeamertemplate{subtitle}{
+	\raggedright%
+	\insertsubtitle%
+	\par%
+%	\vspace*{0.5em}
+}
+
+\makeatletter
+%\newlength{\metropolis@titleseparator@linewidth}
+\setlength{\metropolis@titleseparator@linewidth}{0.8pt}
+\setbeamertemplate{title separator}{
+	\begin{tikzpicture}
+	\fill[fg] (0,0) rectangle (\textwidth, \metropolis@titleseparator@linewidth);
+	\end{tikzpicture}%
+	\par%
+}
+\makeatother
+\setbeamertemplate{author}{
+	\vspace*{2em}
+	\insertauthor \\%
+	\insertemail
+	\par%
+	\vspace*{0.25em}
+}
+\setbeamertemplate{date}{
+	\scriptsize \insertcity, \insertdate%
+	\par%
+}
+\setbeamertemplate{institute}{
+%	\vspace*{3mm}
+%	\vfill
+%	\hfill
+	\insertinstitute
+	\par%
+}
+
+
+\def\titlepage{%
+	\usebeamertemplate{title page}
+}
+
+
+\makeatletter
+\def\maketitle{%
+	\ifbeamer@inframe
+		\titlepage
+	\else%
+		\setbeamercolor{normal text}{fg=black!2   ,	bg=cddarkblue}
+		\frame[plain,noframenumbering]{\titlepage}%
+		\setbeamercolor{normal text}{fg=cddarkblue,	bg=black!2}
+		
+	\fi%
+}
+\makeatother
+%%%%%% Neugestaltung des Titelblattes ---- ENDE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand*{\changeemail}{}
+\newcommand*{\email}[1]{\renewcommand*{\changeemail}{#1}}
+\newcommand{\insertemail}{\url{\changeemail}}
+
+\newcommand*{\changecity}{}
+\newcommand*{\city}[1]{\renewcommand*{\changecity}{#1}}
+\newcommand{\insertcity}{\changecity}
