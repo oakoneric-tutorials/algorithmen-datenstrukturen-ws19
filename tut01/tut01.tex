@@ -1,0 +1,259 @@
+\documentclass{beamer}
+\usepackage{../tut-slides}
+\usepackage{../mathoperatorsAuD}
+
+\usepackage{amsmath,amssymb}
+\usepackage{enumerate}
+\usepackage[inline]{enumitem} 		%customize label
+\newcommand{\labelitemi}{\raisebox{1pt}{\scalebox{.9}{$\blacktriangleright$}}}
+\newcommand{\labelitemii}{$\vartriangleright$}
+\newcommand{\labelitemiii}{--}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{tabu}
+\newcommand*\head{\rowfont{\bfseries}}
+\newcommand*{\tw}{\rowfont{\ttfamily}}
+
+\renewcommand{\tabularxcolumn}[1]{>{\hspace{0pt}}m{#1}}
+
+\begin{document}	
+	\title{Algorithmen und Datenstrukturen}
+	\subtitle{Übung 1: Einleitung}
+	\author{Eric Kunze}
+	\email{eric.kunze@mailbox.tu-dresden.de}
+	\city{TU Dresden}
+%	\institute{Lehrstuhl für Grundlagen der Programmierung}
+	\titlegraphic{\includegraphics[width=2cm]{C:/texlive/2017/texmf-dist/tex/latex/tudscr/logo/TUD-white.pdf}}
+
+	\maketitle
+	
+	\begin{frame} \frametitle{Unsere Runde}
+		\begin{minipage}{\dimexpr0.75\linewidth-\fboxrule-\fboxsep}
+			\emph{Wer bin ich?}
+			\begin{itemize}
+				\item Eric [Kunze]
+				\item \url{eric.kunze@mailbox.tu-dresden.de}
+				\item Fragen, Wünsche, Vorschläge, \dots \\ gern persönlich vor/nach der Übung oder per Mail
+			\end{itemize}
+		\end{minipage}
+		\begin{minipage}{\dimexpr0.25\linewidth-\fboxrule-\fboxsep}
+			\includegraphics[width=3cm]{./tut01_pic.jpg}
+		\end{minipage}
+	
+		\pause
+		
+		\begin{minipage}{\dimexpr0.75\linewidth-\fboxrule-\fboxsep}
+			\emph{Wer seid ihr?}
+			\begin{itemize}
+				\item \url{https://invote.tu-dresden.de/78190}
+			\end{itemize}
+		\end{minipage}
+		\begin{minipage}{\dimexpr0.25\linewidth-\fboxrule-\fboxsep}
+		\includegraphics[width=3cm]{./tut01_invote_1.png}
+	\end{minipage}
+		
+	\end{frame}
+
+	\begin{frame}\frametitle{Infos \& Co}
+		\textbf{Lehrveranstaltungswebsite}: \\
+		{\small \url{https://www.orchid.inf.tu-dresden.de/teaching/2019ws/aud/} \\
+			(Google: ''aud tu dresden``)}
+		\begin{itemize}
+			\item alle Informationen zur Lehrveranstaltung
+			\item aktuelles Übungsblatt
+			\item Link zu Lösungsvorschlägen
+			\item Übungsverlegungen
+		\end{itemize}
+		
+		\pause 
+		
+		\textbf{Skript \& Aufgabensammlung}: Copyshop ''Die Kopie``
+		
+		\pause
+		
+		\begin{block}{Übungsverlegung für Donnerstag, 31. Oktober 2019}	
+			\begin{tabularx}{\textwidth}{XX}
+				\begin{itemize}[nolistsep]
+					\item Montag, 4. DS 
+					\item Dienstag, 6. DS
+				\end{itemize} &%
+				\begin{itemize}[nolistsep]
+					\item Mittwoch, 2. DS
+					\item Mittwoch, 3. DS
+					\item Mittwoch, 6. DS
+				\end{itemize}
+			\end{tabularx}
+		\end{block}
+	\end{frame}
+
+	\begin{frame} \frametitle{Vorlesung vs. Übung}
+		\centering
+		\textbf{Was ist eine Übung?}
+		
+		''Lehrveranstaltung an der Hochschule, in der etw., bes. das Anwenden von Grundkenntnissen, von den Studierenden geübt wird`` [Duden]
+		
+		\pause
+		
+		\begin{tabularx}{\linewidth}{X|X}
+			\hline
+			\textbf{Vorlesung} & \textbf{Übung} \\ \hline \hline
+			Vermittlung von neuem Wissen & Üben und Festigen des Stoffes der VL \\ \hline
+			hohes Tempo & (selbst definierbares) langsameres Tempo \\ \hline
+			wenig Interaktion & (sehr) viel Interaktion \\ \hline
+			$\approx 50\%$ Verständnis & $>80\%$ Verständnis \\
+			\hline
+		\end{tabularx}
+	\end{frame}
+
+	\begin{frame} \frametitle{Was wird in der Übung erwartet?}
+		\begin{center}
+			\bfseries
+			Es wird keine reine Vorrechenübung werden!
+		\end{center}
+		
+		\pause
+		
+		\begin{block}{Mein Input}
+			\begin{itemize}[leftmargin=2em, nolistsep]
+				\item Zusammenfassung einiger Vorlesungsinhalte
+				\item Zeit zur Rekapitulation
+				\item beispielhafte Lösungsansätze und Lösungen
+				\item Fragen, Fragen, Fragen
+			\end{itemize}
+		\end{block}
+	
+		\pause
+			%
+		\begin{block}{Euer Input}
+			\begin{itemize}[leftmargin=2em, nolistsep]
+				\item Grundverständnis aus der Vorlesung
+				\item Vorbereitung der Übungsaufgaben
+				\item aktive Mitarbeit und FRAGEN
+			\end{itemize}
+		\end{block}
+	\end{frame}
+
+	\begin{frame} \frametitle{Lösungen}
+		\textbf{Slides werden mit Sourcecode auf Github zur Verfügung stehen.}
+		\begin{itemize}[leftmargin=*]
+			\item \url{https://github.com/oakoneric/algorithmen-datenstrukturen-ws19}
+			\item \url{github.com} $\to$ oakoneric $\to$ algorithmen-datenstrukturen-ws19
+			\item evtl. zusätzliche Materialien (nach Bedarf)
+			\item \alert{\textbf{kein Anspruch auf Vollständigkeit \& Korrektheit}}
+			\item gefundene Fehler melden - am besten per Pull-Request
+		\end{itemize}
+	\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Übungsblatt 1}
+
+
+
+\begin{frame} \frametitle{Aufgabe 1}
+	\renewcommand*{\arraystretch}{1.1}
+	\begin{tabularx}{\textwidth}{>{\hsize=.5\hsize}X | X}
+		\toprule
+		\textbf{Begriff} & \textbf{Erklärung} \\
+		\midrule
+		Syntax & Struktur (einer Sprache), erlaubte Zeichenketten  \\
+		Semantik & Bedeutung der Zeichenketten  \\
+		Objektsprache & (syntaktisch) zu beschreibende Sprache \\
+		Metasprache & Hilfssprache zur Beschreibung der Objektsprache \\
+		Alphabet $\Sigma$ & nichtleere, endliche Menge von Terminalsymbolen, Zeichenvorrat \\
+		Wort & endliche Folge von Symbolen \\
+		Konkatenation & Verkettung von Wörtern \\
+	\end{tabularx}
+\end{frame}	
+
+\begin{frame} \frametitle{Aufgabe 1 (Fortsetzung)}
+	\renewcommand*{\arraystretch}{1.3}
+	\begin{tabularx}{\textwidth}{>{\hsize=.5\hsize}X | X}
+%		\toprule
+		 Begriff & Erklärung \\
+		\midrule
+		Potenzmenge $\mathcal{P}$ & Menge aller Teilmengen \\
+		$\Sigma^\ast$ & Menge aller Wörter über $\Sigma$ \\
+		$\mathcal{P}(\Sigma^\ast)$ & Menge aller Sprachen über $\Sigma$ \\
+		formale Sprache $L$ & Menge von Wörtern über $\Sigma$ \newline $L \in \mathcal{P}(\Sigma^\ast)$ \\
+		Komplexprodukt ''$\cdot$`` & Verknüpfung von Sprachen \newline $L_1 \cdot L_2 = \{uv \mid u \in L_1, v \in L_2 \}$ \\
+		\bottomrule
+	\end{tabularx}
+\end{frame}
+
+\begin{frame} \frametitle{Aufgabe 2}
+	Sei $\Sigma = \{1,2,a,b\}$. \pause
+	\begin{itemize}[leftmargin=*]
+		\item \textbf{Wörter}
+		\dots entstehen durch Konkatentation von Symbolen \\
+		z.B. $\epsilon, 1, 2, a,b,12,1a,1b,21,22,2a,2b,ab,abba,\dots$
+		
+		\item Symbole $\overset{\text{''}\cdot\text{``}}{\longrightarrow}$ Wörter $\overset{\in}{\longrightarrow} \underbrace{\Sigma^\ast}_{\text{Menge 1. Ordnung}} \overset{\in}{\longrightarrow} \underbrace{\mathcal{P}(\Sigma^\ast)}_{\text{Menge 2. Ordnung}}$
+		
+		\item \textbf{Sprache $L$}
+		\dots Menge von Wörtern, d.h. $L \subseteq \Sigma^\ast$ bzw. $L \in \mathcal{P}(\Sigma^\ast)$ , z.B.
+		\begin{equation*}
+		\begin{aligned}
+		L &= \{1a,1b,1aa,1bb,1ab,1aab, \dots \} 
+		= \{1 a^n b^m \colon n,m \ge 0 \} \\
+		&= \{1\} \cdot \{a\}^\ast \cdot \{b\}^\ast
+		\end{aligned}
+		\end{equation*}
+		
+		\textbf{Beachte:} $\emptyset \in \mathcal{P}(\Sigma^\ast)$ und $\epsilon \in \Sigma^\ast$
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame} \frametitle{Aufgabe 3}
+	Seien $L_1 = \{a\}$, $L_2 = \{b\}$, $L_3 = \{a,ba\}$.
+	
+	\begin{itemize}[leftmargin=*]
+		\item $L_1 * L_2 * L_3 = \{aba,abba\}$
+		\item $L_1^\ast = \{a\}^\ast = \{\epsilon,a,aa,aaa, \dots\} = \{a^n \colon n \ge 0\}$
+	 	\item $L_3^\ast = \{\epsilon, a,ba,aa,aba,baa,baba,\dots\} = \{a^{m_1}(ba)^{n_1} \cdots a^{m_k}(ba)^{n_k} \colon m_i, n_i \in \N, k \in \N^+, 1 \le i \le k\}$
+	 	\item $L_2^\ast * L_1 = \{a,ba,bba,bbba,\dots\} = \{b^n a \colon n \ge 0\}$
+	 	\item $\pows{L_1^\ast} = \menge{\emptyset, \menge{\epsilon}, \menge{a}, \menge{aa}, \menge{aaa}, \dots , \menge{\epsilon, a}, \menge{\epsilon,aa}, \menge{\epsilon,aaa}} = \menge{\menge{a^n \colon n \in I} : I \subseteq \N}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Keine Angst vor Mathe!}
+	\begin{block}{Euklid: Satz 4 in Buch II der ''Elemente``}
+		Wird eine Strecke in zwei geteilt, dann ist das Quadrat über der ganzen Strecke gleich den Quadraten über den Teilen und dem doppelten Rechteck, das die Teile ergeben, zusammen.
+	\end{block}
+
+
+	\small siehe \url{http://www.opera-platonis.de/euklid/Buch2.pdf}
+\end{frame}
+
+\begin{frame} \frametitle{Keine Angst vor Mathe!}
+	\begin{block}{al-Khwarizmi in Al-jabr wa'l muqabalah'}
+		\small What must be the amount of a square, which, when twenty-one
+		dirhems are added to it, becomes equal to the equivalent of ten
+		roots of that square?
+		
+		\textbf{Solution}: Halve the number of the roots; the moiety is five.
+		Multiply this by itself; the product is twenty-five. Subtract from
+		this the twenty-one which are connected with the square; the
+		remainder is four. Extract its root; it is two. Subtract this from
+		the moiety of the root, which is five; the remainder is three. This
+		is the root of the square which you required, and the square is
+		nine. Or you may add the root of the moiety of the roots; the
+		sum is seven; this is the root of the square which you sought for,
+		and the square itself is forty nine.
+	\end{block}
+\end{frame}
+
+\begin{frame} \frametitle{Der Kleene-Stern}
+	\begin{Definition}[Kleene-Stern]
+		Für eine formale Sprache $L$ definieren wir
+		\begin{equation*}
+		L^\ast = \bigcup_{n \ge 0} L^n = \bigcup_{n = 0}^\infty L^n
+		\end{equation*}
+		wobei $L^0 = \{ \epsilon \}$ und $L^{n+1} = L^n \cdot L$. \\
+		Beachte: $\{ \epsilon \}^\ast = \emptyset^\ast = \{ \epsilon \}$
+	\end{Definition}
+\end{frame}
+
+\end{document}
