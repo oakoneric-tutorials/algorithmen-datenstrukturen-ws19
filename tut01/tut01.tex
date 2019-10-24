@@ -157,13 +157,13 @@
 		\toprule
 		\textbf{Begriff} & \textbf{Erklärung} \\
 		\midrule
-		Syntax & Struktur (einer Sprache), erlaubte Zeichenketten  \\
-		Semantik & Bedeutung der Zeichenketten  \\
-		Objektsprache & (syntaktisch) zu beschreibende Sprache \\
-		Metasprache & Hilfssprache zur Beschreibung der Objektsprache \\
-		Alphabet $\Sigma$ & nichtleere, endliche Menge von Terminalsymbolen, Zeichenvorrat \\
-		Wort & endliche Folge von Symbolen \\
-		Konkatenation & Verkettung von Wörtern \\
+		\only{Syntax & Struktur (einer Sprache), erlaubte Zeichenketten  \\
+		Semantik & Bedeutung der Zeichenketten}<2->  \\
+		\only{Objektsprache & (syntaktisch) zu beschreibende Sprache \\
+		Metasprache & Hilfssprache zur Beschreibung der Objektsprache }<3->\\
+		\only{Alphabet $\Sigma$ & nichtleere, endliche Menge von Terminalsymbolen, Zeichenvorrat}<4-> \\
+		\only{Wort & endliche Folge von Symbolen}<5-> \\
+		\only{Konkatenation & Verkettung von Wörtern}<6-> \\
 	\end{tabularx}
 \end{frame}	
 
@@ -173,11 +173,12 @@
 %		\toprule
 		 Begriff & Erklärung \\
 		\midrule
-		Potenzmenge $\mathcal{P}$ & Menge aller Teilmengen \\
-		$\Sigma^\ast$ & Menge aller Wörter über $\Sigma$ \\
-		$\mathcal{P}(\Sigma^\ast)$ & Menge aller Sprachen über $\Sigma$ \\
-		formale Sprache $L$ & Menge von Wörtern über $\Sigma$ \newline $L \in \mathcal{P}(\Sigma^\ast)$ \\
-		Komplexprodukt ''$\cdot$`` & Verknüpfung von Sprachen \newline $L_1 \cdot L_2 = \{uv \mid u \in L_1, v \in L_2 \}$ \\
+		\only{Potenzmenge $\mathcal{P}$ & Menge aller Teilmengen}<2-> \\
+		\only{$\Sigma^\ast$ & Menge aller Wörter über $\Sigma$}<3-> \\
+		\only{$\mathcal{P}(\Sigma^\ast)$ & Menge aller Sprachen über $\Sigma$}<4-> \\
+		\only{formale Sprache $L$ & Menge von Wörtern über $\Sigma$ \newline $L \in \mathcal{P}(\Sigma^\ast)$}<5-> \\
+		\only{Komplexprodukt ''$\cdot$`` & Verknüpfung von Sprachen \newline $L_1 \cdot L_2 = \{uv \mid u \in L_1, v \in L_2 \}$}<6-> \\
+		\only{$L^\ast$ & Menge aller Konkatenationen von Wörtern aus $L$ \newline $L^\ast = \bigcup_{n \ge 0} L^n$ mit $L^0 = \menge{\epsilon}$ und $L^{n+1} = L^n * L$}<7-> \\
 		\bottomrule
 	\end{tabularx}
 \end{frame}
@@ -188,9 +189,9 @@
 		\item \textbf{Wörter}
 		\dots entstehen durch Konkatentation von Symbolen \\
 		z.B. $\epsilon, 1, 2, a,b,12,1a,1b,21,22,2a,2b,ab,abba,\dots$
-		
+		\pause
 		\item Symbole $\overset{\text{''}\cdot\text{``}}{\longrightarrow}$ Wörter $\overset{\in}{\longrightarrow} \underbrace{\Sigma^\ast}_{\text{Menge 1. Ordnung}} \overset{\in}{\longrightarrow} \underbrace{\mathcal{P}(\Sigma^\ast)}_{\text{Menge 2. Ordnung}}$
-		
+		\pause
 		\item \textbf{Sprache $L$}
 		\dots Menge von Wörtern, d.h. $L \subseteq \Sigma^\ast$ bzw. $L \in \mathcal{P}(\Sigma^\ast)$ , z.B.
 		\begin{equation*}
