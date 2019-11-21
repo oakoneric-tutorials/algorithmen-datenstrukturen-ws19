@@ -1,0 +1,135 @@
+\documentclass{beamer}
+\usepackage{../tut-slides}
+\usepackage{../mathoperatorsAuD}
+
+\usepackage{amsmath,amssymb}
+\usepackage{stmaryrd}
+\usepackage{enumerate}
+%\usepackage[inline]{enumitem} 		%customize label
+%\newcommand{\labelitemi}{\raisebox{1pt}{\scalebox{.9}{$\blacktriangleright$}}}
+%\newcommand{\labelitemii}{$\vartriangleright$}
+%\newcommand{\labelitemiii}{--}
+\setbeamertemplate{itemize item}{\raisebox{1pt}{\scalebox{.9}{$\blacktriangleright$}}}
+\setbeamertemplate{itemize subitem}{$\vartriangleright$}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{tabu}
+\newcommand*\head{\rowfont{\bfseries}}
+\newcommand*{\tw}{\rowfont{\ttfamily}}
+\renewcommand{\tabularxcolumn}[1]{>{\hspace{0pt}}m{#1}}
+
+\usepackage{cancel}
+
+\usepackage{empheq}
+\newcommand*\widefbox[1]{\fbox{\hspace{2em} #1 \hspace{2em}}}
+
+\usepackage{tcolorbox}
+\newtcolorbox{mymathbox}[1][]{colback=white, sharp corners, #1}
+
+%%%% EBNF-Terme %%%%
+\newcommand{\wdh}[1]{\hat{\{} \ #1 \ \hat{\}}}
+\newcommand{\opt}[2]{\hat{(} \ #1 \ \hat{|} \ #2 \ \hat{)}}
+\newcommand{\byp}[1]{\hat{[} \ #1 \ \hat{]}}
+\newcommand{\rdb}[1]{\hat{(} \ #1 \ \hat{)}}
+
+\newcommand{\sem}[1]{\left\llbracket #1 \right\rrbracket}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{numbers=left, 
+	numberstyle=\tiny, 
+	breaklines=true,
+	backgroundcolor=\color{cdgray!20},
+	numbersep=5pt,
+	language=C,
+	tabsize=2,
+	basicstyle=\footnotesize} 
+
+
+\begin{document}	
+	\title{Algorithmen und Datenstrukturen}
+	\subtitle{Übung 5: Programmieren mit $C$}
+	\author{Eric Kunze}
+	\email{eric.kunze@mailbox.tu-dresden.de}
+	\city{TU Dresden}
+%	\institute{Lehrstuhl für Grundlagen der Programmierung}
+	\titlegraphic{\includegraphics[width=2cm]{../TUD-white.pdf}}
+	\date{21.11.2019}
+
+	\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile] \frametitle{C}
+	\begin{itemize}
+		\item Input / Output: \lstinline{# include <stdio.h>}
+		\item Variablentypen: z.B. \texttt{int}, \texttt{float}, \texttt{char}
+		\item arithmetische Operatoren: \texttt{+},\texttt{-},\texttt{*},\texttt{/},\texttt{\%}
+		\item Vergleichsoperatoren: \texttt{==}, \texttt{<}, \texttt{<=}, \texttt{>}, \texttt{>=}
+		\item Logikoperatoren: \texttt{!}, \texttt{\&\&}, \texttt{||}
+		\item Arrays: \lstinline[basicstyle=\normalsize]|int feld[7]| (Indizierung beginnend bei 0)
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile] \frametitle{Bedingungen}
+	\begin{itemize}
+		\item If-Else-Statement: bedingte Ausführung eines Statements
+\begin{lstlisting}
+if ( BoolExp ) {
+	Statement ;
+} else  {
+	Statement ;
+}
+\end{lstlisting}
+		\item Switch-Statement: Fallunterscheidung mit mehr als zwei Fällen
+\begin{lstlisting}
+switch ( Exp ) {
+	case 0: StatementSeq ; break ;
+	case 1: StatementSeq ; break ;
+	default: StatementSeq ;
+}
+\end{lstlisting}
+		
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile] \frametitle{Schleifen}
+	\begin{itemize}
+		\item While-Statement: wiederholte Ausführung eines Statements (Schleifenrumpf)
+\begin{lstlisting}
+while ( BoolExp ) {
+	Statement ;
+}
+\end{lstlisting}
+		\item Do-While-Statement: vergleichbar mit While-Statement, aber Schleifenbedingung wird nach Rumpf geprüft
+\begin{lstlisting}
+do {
+	Statement ;
+} while ( BoolExp )
+\end{lstlisting}
+
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile] \frametitle{Schleifen}
+	\begin{itemize}
+		\item For-Statement: vor der Schleife steht Anzahl der Schleifendurchläufe fest
+\begin{lstlisting}[language=C]
+for ( Assignment ; BoolExp ; Assignment ) {
+	Statement ;
+}
+\end{lstlisting}		
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
