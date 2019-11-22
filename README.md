@@ -8,9 +8,9 @@ Bitte beachtet stets die aktuellen Informationen auf der [Website der Lehrverans
 
 Bei Fragen oder Problemen könnt ihr euch an [mich](mailto:eric.kunze@mailbox.tu-dresden.de) oder an [Thomas Ruprecht](mailto:thomas.ruprecht@tu-dresden.de) wenden.
 
-## Programmieren mit C
+## Programmieren mit C - Crogrammieren
 
-In der Übung verwende ich die GNU Compiler Collection zusammen mit Notepad++ als Editor. Wie ihr euch selbst C-fähig macht, ist euch selbst überlassen.
+In der Übung verwende ich die GNU Compiler Collection (GCC) zusammen mit Notepad++ als Editor. Wie ihr euch selbst C-fähig macht, ist euch selbst überlassen.
 
 Unter Linux ist die Installation von GCC recht einfach mit dem Command `sudo apt-get install build-essential`. Weitere Information zu GCC findet ihr [hier](https://wiki.ubuntuusers.de/GCC/).
 
