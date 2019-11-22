@@ -28,12 +28,30 @@
 <p>Bei Fragen oder Problemen k&#xF6;nnt ihr euch an <a href="mailto:eric.kunze@mailbox.tu-dresden.de">mich</a> oder an <a href="mailto:thomas.ruprecht@tu-dresden.de">Thomas Ruprecht</a> wenden.</p>
 <h2 id="programmieren-mit-c">Programmieren mit C</h2>
 <p>In der &#xDC;bung verwende ich die GNU Compiler Collection zusammen mit Notepad++ als Editor. Wie ihr euch selbst C-f&#xE4;hig macht, ist euch selbst &#xFC;berlassen.</p>
-<p>Weitere Informationen findet ihr auf der Lehrveranstaltungswebsite.</p>
+<p>Unter Linux ist die Installation von GCC recht einfach mit dem Command <code>sudo apt-get install build-essential</code>. Weitere Information zu GCC findet ihr <a href="https://wiki.ubuntuusers.de/GCC/">hier</a>.</p>
+<p>Die Installation unter Windows ist ein wenig schwieriger und kann auf verschiedenen Wegen erfolgen:</p>
+<ul>
+<li><a href="https://wiki.freitagsrunde.org/C_(GCC_unter_Windows)">Hier</a> findet ihr eine recht gute Anleitung. Diese nutzt <a href="http://www.mingw.org/">MinGW</a>.</li>
+<li>Alternativ k&#xF6;nnt ihr euch auch <a href="https://www.cygwin.com/install.html">Cygwin</a> anschauen - ein Tutorial findet ihr beispielsweise <a href="https://warwick.ac.uk/fac/sci/moac/people/students/peter_cock/cygwin/part2/">hier</a>.</li>
+<li>Eine dritte M&#xF6;glichkeit ist <a href="http://tdm-gcc.tdragon.net/index.php/">tdm-gcc</a>.
+Auf jeden Fall findet ihr dazu auch zahlreiche YouTube-Tutorials. Wenn alle Wege scheitern, k&#xF6;nnt ihr auch mal beim iFSR vorbeigehen, die helfen euch bei Installationsproblemen mich fachkundigem Rat weiter.</li>
+</ul>
+<p>Mit dem Befehl <code>gcc -v</code> kann getestet werden, ob der Compiler bereits installiert ist.</p>
+<p>Als Alternative zum Compilieren auf der Konsole k&#xF6;nnt ihr auch einen Online-Compiler ansehen. Ein auf den ersten Blick relativ guter scheint <a href="https://www.onlinegdb.com/online_c_compiler">dieser</a> zu sein.</p>
+<p>Den Quelltext schreibt ihr stets in eine Datei mit der Endung <code>.c</code>, beispielsweise <code>test.c</code>. Dann navigiert ihr in der Konsole in das Verzeichnis, wo ihr die Datei gespeichert habt (mittels Befehl <code>cd</code>). Dort angekommen k&#xF6;nnt ihr den Compile-Vorgang starten mit <code>gcc test.c</code>. Das erzeugt eine ausf&#xFC;hrbare Datei, die den Namen <code>a.out</code> (Linux) oder <code>a.exe</code> (Windows) tr&#xE4;gt. Diese k&#xF6;nnt ihr mit <code>./a.out</code> bzw. <code>./a.exe</code> ausf&#xFC;hren. Soll die ausf&#xFC;hrbare Datei anders hei&#xDF;en, nutzt man die Option <code>-o neuerDateiname</code> zus&#xE4;tzlich, d.h. <code>gcc -o testDatei test.c</code> liefert <code>testDatei</code> bzw. <code>testDatei.exe</code> und die startet ihr dann wie &#xFC;blich mit <code>./testDatei</code> bzw. <code>./testDatei.exe</code>.</p>
+<p>Weitere Informationen findet ihr auch auf der Lehrveranstaltungswebsite.</p>
 <h2 id="kontakt">Kontakt</h2>
 <ul>
 <li>Eric Kunze</li>
 <li>Mail: <a href="eric.kunze@mailbox.tu-dresden.de">eric.kunze@mailbox.tu-dresden.de</a></li>
-<li>... oder alternativ wahrscheinlich irgendwo im Willersbau.</li>
+</ul>
+<p>Sollten dingende Fragen auftauchen, dann ist es wahrscheinlich mich an folgenden Tagen und Orten anzutreffen (aber nicht garantiert):</p>
+<ul>
+<li>Montag, 14:00 - 16:30 im APB vor Raum 3077</li>
+<li>Dienstag, 14:00 - 18:00 im Willersbau, B-Fl&#xFC;gel, 3. Etage</li>
+<li>Mittwoch, 9:00 - 11:00 im Willersbau, B-Fl&#xFC;gel, 3. Etage</li>
+<li>Donnerstag, 9:00 - 11:00 im Willersbau, B-Fl&#xFC;gel, 3. Etage</li>
+<li>Donnerstag, 13:00 - 14:30 im Willersbau, C-Fl&#xFC;gel, Keller</li>
 </ul>
 </article></div><div style="background-color: #b4b2b2;width: 50px;height:50px;line-height: 50px;text-align: center;position: fixed;bottom: 10px;right: 10px;padding-top:5px;" onclick="document.documentElement.scrollTop = document.body.scrollTop =0;">
   <svg t="1533629773982" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1035" xlink="http://www.w3.org/1999/xlink" width="40" height="40"><defs><style type="text/css">@font-face { font-family: uc-nexus-iconfont; src: url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.woff") format("woff"), url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.ttf") format("truetype"); }

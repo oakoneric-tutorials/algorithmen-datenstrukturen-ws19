@@ -12,9 +12,29 @@ Bei Fragen oder Problemen könnt ihr euch an [mich](mailto:eric.kunze@mailbox.tu
 
 In der Übung verwende ich die GNU Compiler Collection zusammen mit Notepad++ als Editor. Wie ihr euch selbst C-fähig macht, ist euch selbst überlassen.
 
-Weitere Informationen findet ihr auf der Lehrveranstaltungswebsite.
+Unter Linux ist die Installation von GCC recht einfach mit dem Command `sudo apt-get install build-essential`. Weitere Information zu GCC findet ihr [hier](https://wiki.ubuntuusers.de/GCC/).
+
+Die Installation unter Windows ist ein wenig schwieriger und kann auf verschiedenen Wegen erfolgen:
+* [Hier](https://wiki.freitagsrunde.org/C_(GCC_unter_Windows)) findet ihr eine recht gute Anleitung. Diese nutzt [MinGW](http://www.mingw.org/).
+* Alternativ könnt ihr euch auch [Cygwin](https://www.cygwin.com/install.html) anschauen - ein Tutorial findet ihr beispielsweise [hier](https://warwick.ac.uk/fac/sci/moac/people/students/peter_cock/cygwin/part2/).
+* Eine dritte Möglichkeit ist [tdm-gcc](http://tdm-gcc.tdragon.net/index.php/).
+Auf jeden Fall findet ihr dazu auch zahlreiche YouTube-Tutorials. Wenn alle Wege scheitern, könnt ihr auch mal beim iFSR vorbeigehen, die helfen euch bei Installationsproblemen mich fachkundigem Rat weiter.
+
+Mit dem Befehl `gcc -v` kann getestet werden, ob der Compiler bereits installiert ist.
+
+Als Alternative zum Compilieren auf der Konsole könnt ihr auch einen Online-Compiler ansehen. Ein auf den ersten Blick relativ guter scheint [dieser](https://www.onlinegdb.com/online_c_compiler) zu sein.
+
+Den Quelltext schreibt ihr stets in eine Datei mit der Endung `.c`, beispielsweise `test.c`. Dann navigiert ihr in der Konsole in das Verzeichnis, wo ihr die Datei gespeichert habt (mittels Befehl `cd`). Dort angekommen könnt ihr den Compile-Vorgang starten mit `gcc test.c`. Das erzeugt eine ausführbare Datei, die den Namen `a.out` (Linux) oder `a.exe` (Windows) trägt. Diese könnt ihr mit `./a.out` bzw. `./a.exe` ausführen. Soll die ausführbare Datei anders heißen, nutzt man die Option `-o neuerDateiname` zusätzlich, d.h. `gcc -o testDatei test.c` liefert `testDatei` bzw. `testDatei.exe` und die startet ihr dann wie üblich mit `./testDatei` bzw. `./testDatei.exe`.
+
+Weitere Informationen findet ihr auch auf der Lehrveranstaltungswebsite.
 
 ## Kontakt
 * Eric Kunze
 * Mail: [eric.kunze@mailbox.tu-dresden.de](eric.kunze@mailbox.tu-dresden.de)
-* ... oder alternativ wahrscheinlich irgendwo im Willersbau.
+
+Sollten dingende Fragen auftauchen, dann ist es wahrscheinlich mich an folgenden Tagen und Orten anzutreffen (aber nicht garantiert):
+* Montag, 14:00 - 16:30 im APB vor Raum 3077
+* Dienstag, 14:00 - 18:00 im Willersbau, B-Flügel, 3. Etage
+* Mittwoch, 9:00 - 11:00 im Willersbau, B-Flügel, 3. Etage
+* Donnerstag, 9:00 - 11:00 im Willersbau, B-Flügel, 3. Etage
+* Donnerstag, 13:00 - 14:30 im Willersbau, C-Flügel, Keller
