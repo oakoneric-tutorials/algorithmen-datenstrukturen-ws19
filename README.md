@@ -28,6 +28,12 @@ Den Quelltext schreibt ihr stets in eine Datei mit der Endung `.c`, beispielswei
 
 Weitere Informationen findet ihr auch auf der Lehrveranstaltungswebsite.
 
+## Weitere Materialien
+* [CheatSheet Linux-Terminal](https://www.cheatography.com/davechild/cheat-sheets/linux-command-line/pdf/)
+* 
+
+
+
 ## Kontakt
 * Eric Kunze
 * Mail: [eric.kunze@mailbox.tu-dresden.de](eric.kunze@mailbox.tu-dresden.de)
