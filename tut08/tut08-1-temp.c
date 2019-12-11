@@ -11,7 +11,7 @@ Aufgabe 1
 #include <stdlib.h>
 #include <stdio.h>
 
-/* 
+/*
 anmerkung: in dieser uebung werden wir nicht mehr mit typedefs arbeiten und somit immer explizit den anfang einer liste oder eines baumes als pointer notieren. ausserdem haben wir keine abkuerzungen mehr fuer datentypen (wie z.b. list oder tree) sondern muessen immer struct element oder struct node schreiben
 */
 
@@ -20,15 +20,15 @@ struct element { int key; struct element *next; }   ;   /* listenelemente */
 struct node { int key; struct node *left, *right; } ;   /* baumknoten */
 
 void append(struct element **lp, int n){
-    
+
 }
 
 void treeToList_rec(struct node *t, struct element **lp){
-    
+
 }
 
 struct element *treeToList(struct node *t){
-    
+
 }
 
 struct node *cons(int key, struct node *l, struct node *r) {
@@ -60,11 +60,11 @@ void printList(struct element *l) { /* ausgabe einer liste */
 
 
 int main() {
-    
+
     /* hier mal ein paar beispielbäume - ein eeetwas größerer und die anderen beiden aus aufgabe 2 */
 
-    struct node *monster = cons(2, cons(3, cons(2, cons(4, cons(6, NULL, NULL), cons(3, NULL, NULL)), cons(6, NULL, NULL)), cons(1, cons(7, cons(6, NULL, NULL), cons(3, NULL, NULL)), cons(9, cons(7, NULL, NULL),cons(8, NULL, NULL)))), cons(1, cons(6, cons(2, NULL, NULL), cons(5, NULL, NULL)), cons(3, cons(4, NULL, NULL), cons(1, NULL, NULL) )));     struct node *t = cons(2, cons(3, cons(2, NULL, NULL), cons(4, NULL, NULL)), cons(1, NULL, NULL));    struct node *s = cons(2, cons(2, NULL, NULL), cons(3, NULL, NULL));
-    
+    struct node *monster = cons(2, cons(3, cons(2, cons(4, cons(6, NULL, NULL), cons(3, NULL, NULL)), cons(6, NULL, NULL)), cons(1, cons(7, cons(6, NULL, NULL), cons(3, NULL, NULL)), cons(9, cons(7, NULL, NULL),cons(8, NULL, NULL)))), cons(1, cons(6, cons(2, NULL, NULL), cons(5, NULL, NULL)), cons(3, cons(4, NULL, NULL), cons(1, NULL, NULL) )));    struct node *t = cons(2, cons(3, cons(2, NULL, NULL), cons(4, NULL, NULL)), cons(1, NULL, NULL));    struct node *s = cons(2, cons(2, NULL, NULL), cons(3, NULL, NULL));
+
     printf("\n==============================================\n");
     printTree(t, 0);
     printf("\n");
@@ -74,11 +74,11 @@ int main() {
     printTree(s, 0);
     printf("\n");
     printList(treeToList(s));
-    
+
     printf("\n==============================================\n");
     printTree(monster, 0);
     printf("\n");
-    printList(treeToList(monster));    
-    
+    printList(treeToList(monster));
+
     return 0;
 }
