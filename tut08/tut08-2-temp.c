@@ -47,14 +47,14 @@ void printTree(struct node *t, int depth) {
 
 int main() {
      
-    struct node *t = cons(2, cons(3, cons(2, NULL, NULL), cons(4, NULL, NULL)), cons(1, NULL, NULL));
-    struct node *s = cons(2, cons(2, NULL, NULL), cons(3, NULL, NULL));
+    struct node *s = cons(2, cons(3, cons(2, NULL, NULL), cons(4, NULL, NULL)), cons(1, NULL, NULL));
+    struct node *t = cons(2, cons(2, NULL, NULL), cons(3, NULL, NULL));
       
-    printTree(t, 0);
     printTree(s, 0);
+    printTree(t, 0);
     
-    struct node *x = baz(t, s);
-    printf("\nbaz(t, s):\n");
+    struct node *x = baz(s, t);
+    printf("\nbaz(s, t):\n");
     printTree(x, 0);
     
     return 0;
