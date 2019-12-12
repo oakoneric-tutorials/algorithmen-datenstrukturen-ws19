@@ -66,7 +66,7 @@ int main() {
     printTree(t, 0);
     
     struct node *x = baz(s, t);
-    printf("\nbaz(t, s):\n");
+    printf("\nbaz(s, t):\n");
     printTree(x, 0);
     
     return 0;
