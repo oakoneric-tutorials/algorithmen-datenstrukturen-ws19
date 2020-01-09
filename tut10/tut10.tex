@@ -52,6 +52,22 @@
 
 \usepackage{qtree}
 
+\newcommand{\lefttree}{\begin{tikzpicture}
+	\draw (0,0) node[anchor=north]{}
+	-- (1,0) node[anchor=north]{}
+	-- (.5,1) node[anchor=south]{}
+	-- cycle;
+	\draw (.5,.5) node[anchor=north]{$L$};
+	\end{tikzpicture}}
+\newcommand{\righttree}{\begin{tikzpicture}
+	\draw (0,0) node[anchor=north]{}
+	-- (1,0) node[anchor=north]{}
+	-- (.5,1) node[anchor=south]{}
+	-- cycle;
+	\draw (.5,.5) node[anchor=north]{$R$};
+	\end{tikzpicture}}
+
+
 \begin{document}	
 	\title{Algorithmen und Datenstrukturen}
 	\subtitle{Übung 10: Suchen \& Korrigieren, AVL-Bäume}
@@ -67,19 +83,45 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame} \frametitle{Algorithmen und Datenstrukturen}
+	\textbf{Was bisher geschah ...}
+	\begin{itemize}
+		\item Syntax von Programmiersprachen \\
+		 (Syntaxdiagramme, EBNF, Fixpunktsemantik)
+		\item Programmieren in $C$ -- Arrays, Pointer, Listen, Bäume
+		\item grundlegende Algorithmen in der Informatik
+		\begin{itemize}
+			\item Sortieren mit Quicksort und Heapsort
+			\item Suchen in Texten (KMP-Algorithmus)
+		\end{itemize}		
+	\end{itemize}
+
+	\pause
+
+	\textbf{Was heute geschieht ...}
+	\begin{itemize}
+		\item Wiederholung: Suche mit dem KMP-Algorithmus
+		\item Fehlerkorrektur mit der Levenshtein-Distanz
+		\item Balancieren von Bäumen (AVL-Bäume)
+	\end{itemize}
+\end{frame}
+
+
+\section{KMP-Algorithmus} 
+
 \begin{frame} \frametitle{KMP-Algorithmus --- Die Zwei-Finger-Methode}
 	Die Methode beruht auf der Gleichung
 	\begin{equation*}
 		\begin{aligned}
 		\small
-		&\texttt{Tab[j]} \\
-		= &\max \menge{-1} \cup \menge{m \mid 0 \le m \le j-1 \land b_0 \dots b_{m-j} = b_{j-m} \land b_{j-1} \land b_m \neq b_j}
-		\end{aligned}
+		&\texttt{Tab[i]} \\
+		= &\max \menge{-1} \cup \menge{m \mid 0 \le m \le i-1 \land b_0 \dots b_{m-i} = b_{i-m} \land b_{i-1} \land b_m \neq b_j}
+		\end{aligned} \tag{$\star$} \label{eq: kmp}
 	\end{equation*}
 	Daraus ergibt sich nach Initialisierung von $\texttt{Tab[0]} = -1$ für jeden folgenden Eintrag $\texttt{Tab[i]}$ folgendes Verfahren:
 	\begin{itemize}
-		\item wähle $m < i$ in absteigender Reihenfolge (also $i-1$, $i-2$, $\dots$), sodass $\texttt{Pat[i]} \neq \texttt{Pat[m]}$
-		\item wenn $\texttt{Pat[0 \dots m-1]} = \texttt{Pat[i-m \dots i-1]}$, dann fülle $\texttt{Tab[i]} = m$.
+		\item \textit{linker Finger}: wähle $m < i$ in absteigender Reihenfolge (also $i-1$, $i-2$, $\dots$), sodass $\texttt{Pat[i]} \neq \texttt{Pat[m]}$
+		\item \textit{Parallelverschiebung beider Finger bis zum linken Rand}: wenn $\texttt{Pat[0 \dots m-1]} = \texttt{Pat[i-m \dots i-1]}$, dann fülle $\texttt{Tab[i]} = m$.
 		\item wenn keine passende Position $m$ gefunden werden kann, dann fülle $\texttt{Tab[i]} = -1$.
 	\end{itemize}
 \end{frame}
@@ -104,18 +146,29 @@
 	\begin{center}
 		\begin{tabular}{l|cccccc}
 			Position &  0 &  1 &  2 &  3 &  4 &  5 \\ \hline
-			Pattern  &  \textit{b} &  a &  b &  a &  b &  \textit{c} \\ \hline
+			Pattern  &  \textit{b} &  \onslide+<4->{a} &  \onslide+<4->{b} &  \onslide+<4->{a} &  \onslide+<4->{b} &  \textit{c} \\ \hline
 			Tabelle  & -1 &  ? & ? &  0 &  ? &  3 \\
 		\end{tabular}
 	\end{center}
+
+	\pause
+
+	\footnotesize
+	\begin{itemize}
+		\item $\texttt{Pat[0 ... 2] = Pat[2 ... 4]}$ wegen $\texttt{Tab[5] = 3}$ (Zyklenmethode), d.h. $\texttt{Pat[2] = Pat[0] = Pat[4] = b}$
+		\item wegen $\texttt{Tab[3] = 0}$ ist $\texttt{Pat[3]} \neq  \texttt{Pat[0] = b}$ und wegen $\texttt{Tab[5] = 3}$ ist $\texttt{Pat[3]} \neq \texttt{Pat[5] = c}$ (Zwei-Finger-Methode bzw. Gleichung \eqref{eq: kmp}) \\
+		$\Rightarrow \texttt{Pat[3] = Pat[1] = a}$
+	\end{itemize}
 	
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Levenshtein-Distanz}
 
 \begin{frame} \frametitle{Levenshtein-Distanz}
 	\textbf{Kosten} zur Überführung eines Wortes $w = w_1 \dots w_n$ in ein Wort $v = v_1 \dots v_k$ ; schreibe $d(w_1 \dots w_j, v_1 \dots v_i) = d(j,i)$.
+	\pause
 	\begin{align*}
 		d(0,i) &= i \\
 		d(j,0) &= j \\
@@ -151,21 +204,26 @@
 			\begin{tabular}{l|ccccccccccccccc}
 				$d(j,i)$ &       &       & \textbf{D} &       & \textbf{i} &       & \textbf{s} &       & \textbf{t} &       & \textbf{a} &       & \textbf{n} &       & \textbf{z} \\ \hline \\
 				& 0     & $\rightarrow$ & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3     & $\rightarrow$ & 4     & $\rightarrow$ & 5     & $\rightarrow$ & 6     & $\rightarrow$ & 7 \\
-				& $\downarrow$ & $\searrow$ &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+				& $\downarrow$ & \alert<3->{$\searrow$} &       &       &       &       &       &       &       &       &       &       &       &       &  \\
 				\textbf{D}     & 1     &       & 0     & $\rightarrow$ & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3     & $\rightarrow$ & 4     & $\rightarrow$ & 5     & $\rightarrow$ & 6 \\
-				& $\downarrow$ &       & $\downarrow$ & $\searrow$ &       &       &       &       &       &       &       &       &       &       &  \\
+				& $\downarrow$ &       & $\downarrow$ & \alert<3->{$\searrow$} &       &       &       &       &       &       &       &       &       &       &  \\
 				\textbf{i}     & 2     &       & 1     &       & 0     & $\rightarrow$ & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3     & $\rightarrow$ & 4     & $\rightarrow$ & 5 \\
-				& $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       &       &  \\
+				& $\downarrow$ &       & $\downarrow$ &       & \alert<3->{$\downarrow$} & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       &       &  \\
 				\textbf{n}     & 3     &       & 2     &       & 1     &       & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3     &       & 3     & $\rightarrow$ & 4 \\
-				& $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ & $\downarrow$ & $\searrow$ &  \\
+				& $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & \alert<3->{$\searrow$} &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ & $\downarrow$ & $\searrow$ &  \\
 				\textbf{s}     & 4     &       & 3     &       & 2     &       & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3     & $\rightarrow$ & 4     &       & 4 \\
-				& $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & $\searrow$ &       &       &       &       &       &       &  \\
+				& $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & \alert<3->{$\searrow$} &       &       &       &       &       &       &  \\
 				\textbf{t}     & 5     &       & 4     &       & 3     &       & 2     &       & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3     & $\rightarrow$ & 4 \\
-				& $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & $\searrow$ &       &       &       &       &  \\
-				\textbf{a}     & 6     &       & 5     &       & 4     &       & 3     &       & 2     &       & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3 \\
-				& $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & $\searrow$ & $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & $\searrow$ &       & $\searrow$ &  \\
-				\textbf{s}     & 7     &       & 6     &       & 5     &       & 4     &       & 3     &       & 2     &       & 2     & $\rightarrow$ & 3 \\
+				& $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & \alert<3->{$\searrow$} &       &       &       &       &  \\
+				\textbf{a}     & 6     &       & 5     &       & 4     &       & 3     &       & 2     &       & 1     & \alert<3-3>{$\rightarrow$} & 2     & $\rightarrow$ & 3 \\
+				& $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & $\searrow$ & $\downarrow$ &       & $\downarrow$ &       & $\downarrow$ & \alert<4->{$\searrow$} &       & \alert<3-3>{$\searrow$} &  \\
+				\textbf{s}     & 7     &       & 6     &       & 5     &       & 4     &       & 3     &       & 2     &       & 2     & \alert<4->{$\rightarrow$} & 3 \\
 			\end{tabular}
+		
+		\pause
+		\begin{equation*}
+			d(\text{Dinstas}, \text{Distanz}) = 3
+		\end{equation*}
 \end{frame}
 
 \begin{frame} \frametitle{Aufgabe 9.4}
@@ -196,32 +254,64 @@
 	\setlength{\tabcolsep}{3pt}
 	\begin{tabular}{l|rrrrrrrlrrrlrlr}
 		$d(j,i)$ &       &       & \textbf{s} &       & \textbf{c} &       & \textbf{h} &       & \textbf{ü} &       & \textbf{r} &       & \textbf{z} &       & \textbf{e} \\ \hline \\
-		& 0     & $\rightarrow$ & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3     & $\rightarrow$ & 4     & $\rightarrow$ & 5     & $\rightarrow$ & 6     & $\rightarrow$ & 7 \\
-		& $\downarrow$ & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ &  \\
-		\textbf{b}     & 1     &       & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3     & $\rightarrow$ & 4     & $\rightarrow$ & 5     & $\rightarrow$ & 6     & $\rightarrow$ & 7 \\
-		& $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       &       &       &       &       &       &  \\
+		& 0     & \alert<3->{$\rightarrow$} & 1     & \alert<3->{$\rightarrow$} & 2     & $\rightarrow$ & 3     & $\rightarrow$ & 4     & $\rightarrow$ & 5     & $\rightarrow$ & 6     & $\rightarrow$ & 7 \\
+		& $\downarrow$ & \alert<4->{$\searrow$} &       & \alert<4->{$\searrow$} &       & \alert<3->{$\searrow$} &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ &       & $\searrow$ &  \\
+		\textbf{b}     & 1     &       & 1     & \alert<4->{$\rightarrow$} & 2     & \alert<4->{$\rightarrow$} & 3     & $\rightarrow$ & 4     & $\rightarrow$ & 5     & $\rightarrow$ & 6     & $\rightarrow$ & 7 \\
+		& $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &       & $\searrow$ &       & \alert<3->{$\searrow$} &       &       &       &       &       &       &  \\
 		\textbf{ü}     & 2     &       & 2     &       & 2     & $\rightarrow$ & 3     &       & 3     & $\rightarrow$ & 4     & $\rightarrow$ & 5     & $\rightarrow$ & 6 \\
-		& $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &       & $\searrow$ & $\downarrow$ & $\searrow$ &       &       &       &       &  \\
+		& $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &       & $\searrow$ & $\downarrow$ & \alert<3->{$\searrow$} &       &       &       &       &  \\
 		\textbf{r}     & 3     &       & 3     &       & 3     &       & 3     & $\rightarrow$ & 4     &       & 3     & $\rightarrow$ & 4     & $\rightarrow$ & 5 \\
-		& $\downarrow$ & $\searrow$ &       & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &       &       & $\downarrow$ & $\searrow$ &       & $\searrow$ &  \\
+		& $\downarrow$ & $\searrow$ &       & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &       &       & \alert<4->{$\downarrow$} & \alert<3->{$\searrow$} &       & $\searrow$ &  \\
 		\textbf{s}     & 4     &       & 3     & $\rightarrow$ & 4     &       & 4     &       & 4     &       & 4     &       & 4     & $\rightarrow$ & 5 \\
-		& $\downarrow$ &       & $\downarrow$ & $\searrow$ &       & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &  \\
+		& $\downarrow$ &       & $\downarrow$ & $\searrow$ &       & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & \alert<4->{$\searrow$} & \alert<3->{$\downarrow$} & $\searrow$ &  \\
 		\textbf{t}     & 5     &       & 4     &       & 4     & $\rightarrow$ & 5     &       & 5     &       & 5     &       & 5     &       & 5 \\
-		& $\downarrow$ &       & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &       & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &  \\
+		& $\downarrow$ &       & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ &       & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & $\searrow$ & $\downarrow$ & \alert<3->{$\searrow$} &  \\
 		\textbf{e}     & 6     &       & 5     &       & 5     &       & 5     & $\rightarrow$ & 6     &       & 6     & & 6     &  & 5 \\
 	\end{tabular}%
 
 	\pause
 
 	\begin{equation*}
-		d(\text{bürste}, \text{schürze}) = 5
+		d(\text{bürste}, \text{schürze}) = 5 \qquad \pause \pause \pause \text{Anzahl der Backtraces } = 3 * 2 = 6
 	\end{equation*}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{AVL-Bäume}
+
+\begin{frame} \frametitle{AVL-Bäume}
+	Wir betrachten einen Baum $t$ und bezeichnen die \textit{Schlüssel} an den Knoten $n$ mit $s(n)$. 
+	\pause
+	
+	\textbf{Suchbaum:} \Tree [.$s(n)$ [ .{\lefttree} ] [ .{\righttree} ] ] mit $L < s(n) < R$
+	
+	\pause
+	
+	Die \textit{Höhe} des Baumes bezeichnen wir mit $h(t)$.
+	Wir ordnen jedem Knoten $n$ einen \textit{Balancefaktor} $b(n)$ zu:
+	\begin{equation*}
+		b(n) \defeq h(R) - h(L)
+	\end{equation*}
+	
+	\pause
+	\textbf{AVL-Baum:} Suchbaum mit $b(n) \in \menge{-1, 0, 1}$
+\end{frame}
+
+\begin{frame} \frametitle{Balancieren}
+	\begin{itemize}
+		\item Einfügen eines neuen Schlüssels $s$
+		\item Berechne Balancefaktoren auf dem Pfad von $s$ zur Wurzel bis zum ersten Auftreten von $\pm 2$
+		\item \textbf{Balancierungsalgorithmus}: 
+		\includegraphics[width=\linewidth]{./tut10_avl.jpg}
+	\end{itemize}
+\end{frame}
 
 \begin{frame} \frametitle{Aufgabe 3}
+	\begin{footnotesize}
+		\textbf{Achtung:} Die Blätter sind eigentlich links oder rechts des Elternknotens angeordnet, nicht exakt darunter.
+	\end{footnotesize}
+
 	\begin{tabularx}{\linewidth}{m{2cm} m{.8cm} m{2cm} m{.8cm} m{2cm}}
 		\Tree [ .2 [ .1 ] [ .3 [ .4 ]  ] ] 
 		&
@@ -231,7 +321,17 @@
 		&
 		$\overset{L(3)}{\longrightarrow}$
 		&
-		\Tree [ .2 [ .1 ] [ .4 [ .3 ] [ .5 ] ] ] \\
+		\Tree [ .2 [ .1 ] [ .4 [ .3 ] [ .5 ] ] ] %\\ \hline \\
+%		\Tree [ .4 [ .2 [ .3 ]  ] [ .5 ] ] 
+%		&
+%		$\overset{i(1)}{\longrightarrow}$
+%		&
+%		\Tree [ .$4^{-1}$ [ .$2^0$ [ .$1^0$ ] [ .$3$ ]  ] [ .5 ] ]
+	\end{tabularx}
+\end{frame}
+
+\begin{frame} \frametitle{Aufgabe 3}
+	\begin{tabularx}{\linewidth}{m{2cm} m{.8cm} m{2cm} m{.8cm} m{2cm}}
 		\Tree [ .4 [ .2 [ .3 ]  ] [ .5 ] ] 
 		&
 		$\overset{i(1)}{\longrightarrow}$
