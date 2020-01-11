@@ -51,6 +51,7 @@
 \renewcommand{\tabularxcolumn}[1]{m{#1}}
 
 \usepackage{qtree}
+\usepackage[edges]{forest}
 
 \newcommand{\lefttree}{\begin{tikzpicture}
 	\draw (0,0) node[anchor=north]{}
@@ -276,6 +277,49 @@
 	\end{equation*}
 \end{frame}
 
+\begin{frame} \frametitle{Aufgabe 2 --- Teil (b)}
+	Alignments mit minimaler Levenshtein-Distanz zwischen den Wörtern
+	\texttt{bürst} und \texttt{sch}
+	
+	\centering
+	\renewcommand*{\arraystretch}{.7}
+	\setlength{\tabcolsep}{3pt}
+	\begin{tabular}{l|ccccccc}
+		$d(j,i)$ &       &       & \textbf{s} &       & \textbf{c} &       & \textbf{h}  \\ \hline \\
+		& 0     & $\rightarrow$ & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3  \\
+		& \alert<2->{$\downarrow$} & \alert<2->{$\searrow$} &       & $\searrow$ &       & $\searrow$ &  \\
+		\textbf{b}     & 1     &       & 1     & $\rightarrow$ & 2     & $\rightarrow$ & 3  \\
+		& \alert<2->{$\downarrow$} & \alert<2->{$\searrow$} & \alert<2->{$\downarrow$} & \alert<2->{$\searrow$} &       & $\searrow$ &   \\
+		\textbf{ü}     & 2     &       & 2     &       & 2     & $\rightarrow$ & 3  \\
+		& \alert<2->{$\downarrow$} & \alert<2->{$\searrow$} & \alert<2->{$\downarrow$} & \alert<2->{$\searrow$} & \alert<2->{$\downarrow$} & \alert<2->{$\searrow$} & \\
+		\textbf{r}     & 3     &       & 3     &       & 3     &       & 3 \\
+		& $\downarrow$ & \alert<2->{$\searrow$} &       & \alert<2->{$\searrow$} & \alert<2->{$\downarrow$} & \alert<2->{$\searrow$} & \alert<2->{$\downarrow$}  \\
+		\textbf{s}     & 4     &       & 3     & \alert<2->{$\rightarrow$} & 4     &       & 4  \\
+		& $\downarrow$ &       & $\downarrow$ & \alert<2->{$\searrow$} &       & \alert<2->{$\searrow$} & \alert<2->{$\downarrow$} \\
+		\textbf{t}     & 5     &       & 4     &       & 4     & \alert<2->{$\rightarrow$} & 5   \\
+	\end{tabular}%
+\end{frame}
+
+\begin{frame} \frametitle{Aufgabe 2 --- Teil (b)}
+	Alignments mit minimaler Levenshtein-Distanz zwischen den Wörtern
+	\texttt{bürst} und \texttt{sch}
+	
+	\centering
+	\begin{tabular}{ccccc}
+		b & ü & r & s & t \\
+		$|$ & $|$ & $|$ & $|$ & $|$ \\
+		s & c & h & $\ast$ & $\ast$ \\
+		\textit{s} & \textit{s} & \textit{s} & \textit{d} & \textit{d}  \\
+	\end{tabular}
+	\hspace{2em}
+	\begin{tabular}{ccccc}
+		b & ü & r & s & t \\
+		$|$ & $|$ & $|$ & $|$ & $|$ \\
+		$\ast$ & $\ast$ & s & c & h \\
+		\textit{d} & \textit{d} & \textit{s} & \textit{s} & \textit{s}  \\
+	\end{tabular}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{AVL-Bäume}
@@ -308,70 +352,85 @@
 \end{frame}
 
 \begin{frame} \frametitle{Aufgabe 3}
-	\begin{footnotesize}
-		\textbf{Achtung:} Die Blätter sind eigentlich links oder rechts des Elternknotens angeordnet, nicht exakt darunter.
-	\end{footnotesize}
-
 	\begin{tabularx}{\linewidth}{m{2cm} m{.8cm} m{2cm} m{.8cm} m{2cm}}
-		\Tree [ .2 [ .1 ] [ .3 [ .4 ]  ] ] 
+		\begin{forest}
+			[ $2$ [ $1$ ] [$3$ [,no edge, draw=none] [ $4$ ]  ] ] 
+		\end{forest} 
 		&
 		$\overset{i(5)}{\longrightarrow}$
 		&
-		\Tree [ .$2^2$ [ .$1$ ] [ .$3^2$ [ .$4^1$ [ .$5^0$ ]  ] ]  ] 
+		\begin{forest}
+			[ $2^2$ [ $1$ ] [ $3^2$ [,no edge, draw=none] [ $4^1$ [,no edge, draw=none] [ $5^0$ ]  ] ]  ]
+		\end{forest}  
 		&
 		$\overset{L(3)}{\longrightarrow}$
 		&
-		\Tree [ .2 [ .1 ] [ .4 [ .3 ] [ .5 ] ] ] %\\ \hline \\
-%		\Tree [ .4 [ .2 [ .3 ]  ] [ .5 ] ] 
-%		&
-%		$\overset{i(1)}{\longrightarrow}$
-%		&
-%		\Tree [ .$4^{-1}$ [ .$2^0$ [ .$1^0$ ] [ .$3$ ]  ] [ .5 ] ]
+		\begin{forest}
+			[ $2$ [ $1$ ] [ $4$ [ $3$ ] [ $5$ ] ] ]
+		\end{forest}
 	\end{tabularx}
 \end{frame}
 
 \begin{frame} \frametitle{Aufgabe 3}
-	\begin{tabularx}{\linewidth}{m{2cm} m{.8cm} m{2cm} m{.8cm} m{2cm}}
-		\Tree [ .4 [ .2 [ .3 ]  ] [ .5 ] ] 
+	\centering
+	\begin{tabularx}{\linewidth}{m{2cm} m{.8cm} m{4cm}}
+		\begin{forest}
+			[ $4$ [ $2$ [,no edge, draw=none] [ $3$ ]  ] [ $5$ ] ]
+		\end{forest}
 		&
 		$\overset{i(1)}{\longrightarrow}$
 		&
-		\Tree [ .$4^{-1}$ [ .$2^0$ [ .$1^0$ ] [ .$3$ ]  ] [ .5 ] ]
+		\begin{forest}
+			[ $4^{-1}$ [ $2^0$ [ $1^0$ ] [ $3$ ]  ] [ $5$ ] ]
+		\end{forest} 
 	\end{tabularx}
 \end{frame}
 
 \begin{frame} \frametitle{Aufgabe 3}
 	\footnotesize
-	\begin{tabularx}{\linewidth}{m{2.8cm} m{.5cm} m{2.8cm} m{.5cm} m{3cm}}
-		\Tree [ .8 [ .5 [ .3 [ .2 ] [ .4 ]] [ .7 [ .6 ]  ] ] [ .10 [ .9 ] [ .11 ] ] ]
+	\begin{tabularx}{\linewidth}{m{2.8cm} m{.5cm} m{2.8cm}}
+		\begin{forest}
+			[ $8$ [ $5$ [ $3$ [ $2$ ] [ $4$ ]] [ $7$ [ $6$ ] [,no edge, draw=none]  ] ] [ $10$ [ $9$ ] [ $11$ ] ] ]
+		\end{forest}
 		&
 		$\overset{i(1)}{\longrightarrow}$
 		&
-		\Tree [ .$8^{-2}$ [ .$5^{-1}$ [ .$3^{-1}$ [ .$2^{-1}$ [ .$1^0$ ]] [ .4 ]] [ .7 [ .6 ]  ] ] [ .10 [ .9 ] [ .11 ] ] ]
+		\begin{forest}
+			[ $8^{-2}$ [ $5^{-1}$ [ $3^{-1}$ [ $2^{-1}$ [ $1^0$ ] [,no edge, draw=none]] [ $4$ ]] [ $7$ [ $6$ ] [,no edge, draw=none]  ] ] [ $10$ [ $9$ ] [ $11$ ] ] ]
+		\end{forest} 
+		\\
 		&
 		$\overset{R(8)}{\longrightarrow}$
 		&
-		\Tree [ .5 [ .3 [ .2 [ .1 ] ] [ .4 ] ] [ .8 [ .7 [ .6 ] ] [ .10 [ .9 ] [ .11 ]] ] ]
+		\begin{forest}
+			[ $5$ [ $3$ [ $2$ [ $1$ ] [,no edge, draw=none] ] [ $4$ ] ] [ $8$ [ $7$ [ $6$ ] [,no edge, draw=none]] [ $10$ [ $9$ ] [ $11$ ]] ] ]
+		\end{forest} 
 	\end{tabularx}
 \end{frame}
 
 \begin{frame} \frametitle{Aufgabe 3}
 	\small
 	\begin{tabularx}{\linewidth}{m{2cm} m{.5cm} m{2.5cm} m{.5cm} m{2cm}}
-		\Tree [ .5 [ .2 [ .1 ] [ .4 ] ] [ .6 ] ]
+		\begin{forest}
+			[ $5$ [ $2$ [ $1$ ] [ $4$ ] ] [ $6$ ] ]
+		\end{forest} 
 		&
 		$\overset{i(3)}{\longrightarrow}$
 		&
-		\Tree [ .$5^{-2}$ [ .$2^{1}$ [ .$1$ ] [ .$4^{-1}$ [ .$3^0$ ] ] ] [ .6 ] ]
+		\begin{forest}
+			[ $5^{-2}$ [ $2^{1}$ [ $1$ ] [ $4^{-1}$ [ $3^0$ ] [,no edge, draw=none]] ] [ $6$ ] ]
+		\end{forest} 
 		&
 		$\overset{L(2)}{\longrightarrow}$
 		&
-		\Tree [ .5 [ .4 [ .2 [ .1 ] [ .3 ] ] ] [ .6 ] ] \\ \\
+		\begin{forest}
+			[ $5$ [ $4$ [ $2$ [ $1$ ] [ $3$ ] ] [,no edge, draw=none] ] [ $6$ ] ]
+		\end{forest}  \\ \\
 		& $\overset{R(5)}{\longrightarrow}$
 		& 
-		\Tree [ .4 [ .2 [ .1 ] [ .3 ]] [ .5 [ .6 ] ] ]
-		
-	\end{tabularx}
-\end{frame}
+		\begin{forest}
+			[ $4$ [ $2$ [ $1$ ] [ $3$ ]] [ $5$ [,no edge, draw=none] [ $6$ ] ] ]
+		\end{forest}
+	\end{tabularx}\end{frame}
 
 \end{document}
