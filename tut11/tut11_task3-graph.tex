@@ -1,0 +1,41 @@
+\documentclass{standalone}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.10}   % in my packages used compat=1.15
+\usepgfplotslibrary{fillbetween}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{patterns,arrows,calc,decorations.pathmorphing,backgrounds, positioning,fit,petri,decorations.fractals}
+\usetikzlibrary{matrix}
+
+\usepackage[table,dvipsnames]{tudscrcolor}
+
+\usepackage[default]{opensans}
+
+\begin{document}
+	\color{cddarkblue}
+	\begin{tikzpicture}[auto]
+	% Knoten
+		\node (4) at (0,0)  [circle,draw] {4};
+		\node (3) at (0,1.5)  [circle,draw] {3};
+		\node (5) at (0,-1.5) [circle,draw] {5};
+		\node (1) at (-1,.75) [circle,draw] {1};
+		\node (2) at (-1,-.75) [circle,draw] {2};
+		\node (6) at (1,.75) [circle,draw] {6};
+		\node (7) at (1,-.75) [circle,draw] {7};
+	% Kanten
+%		\path (1) -> node[weight] {$3$} (3)
+		\draw[->] (1) edge node[pos=.08, above]{\scriptsize 3} (3);
+		\draw[->] (2) edge node{\scriptsize 8} (1);
+		\draw[->] (2) edge node[pos=.08, above]{\scriptsize 2} (4);
+		\draw[->] (4) edge node{\scriptsize 8} (3);
+		\draw[->] (4) edge node[pos=.08, above]{\scriptsize 4} (1);
+		\draw[->] (4) edge node[pos=.08, above]{\scriptsize 3} (6);
+		\draw[->] (4) edge node[pos=.08, right]{\scriptsize 6} (7);
+		\draw[->] (5) edge node[pos=.08, left]{\scriptsize 4} (2);
+		\draw[->] (5) edge node{\scriptsize 7} (4);
+		\draw[->] (5) edge node[pos=.08, right]{\scriptsize 15} (7);
+		\draw[->] (6) edge node[pos=.08, above]{\scriptsize 3} (3);
+		\draw[->] (6) edge node{\scriptsize 2} (7);
+	\end{tikzpicture}
+\end{document}
