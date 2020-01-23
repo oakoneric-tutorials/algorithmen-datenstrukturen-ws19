@@ -1,0 +1,92 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{lipsum}
+
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{parskip}  	% split paragraphs by vspace instead of intendations
+\usepackage[onehalfspacing]{setspace} % increase row-space
+%\usepackage[title,titletoc]{appendix}
+%
+%\usepackage{chngcntr}
+%\usepackage{eufrak}
+%
+\usepackage{lmodern}
+%\usepackage[default, scale=0.9]{opensans}
+\usepackage{ulem} 
+\usepackage{csquotes}
+
+\usepackage{graphicx}
+
+\begin{document}
+	\section*{KMP-Algorithmus}
+	
+	Also kurz zur Zwei-Finger-Methode: Wir nehmen den rechten Finger auf die zu berechnende Stelle, den linken Finger positionieren wir eine Stelle daneben. Jetzt vergleichen wir, ob ein Missmatch vorliegt.
+	\begin{itemize}
+		\item Wenn ja, dann ist das schön und wir können mit der Parallelverschiebung beginnen, d.h. wir schieben beiden Finger synchron um eine Stelle nach links und testen auf Match. 
+		\begin{itemize}
+			\item Erreichen wir dann irgendwann den linken Rand, so war der Durchlauf erfolgreich und die Startposition des linken Fingers wird der Eintrag an der Startposition des rechten Fingers.
+			\item Erreichen wir den linken Rand nicht, d.h. es liegt irgendwo nochmal ein Missmatch vor, dann funktioniert dieser Durchlauf nicht, und wir gehen mit den Fingern wieder zurück zur Startposition.
+		\end{itemize}
+		\item Da nun entweder der Missmatch-Test nicht geklappt hat oder die Parallelverschiebung nicht bis zum Schluss durchführbar war, müssen wir jetzt den linken Finger einmal nach links verschieben und dort wieder von Neuem beginnen, d.h. es startet wieder mit dem Missmatch-Test.
+	\end{itemize}
+
+	So jetzt schauen wir uns einmal die Aufgabe 3 von Blatt 9 (7.1.10) an.
+	Gegeben ist die Tabelle
+	
+	\begin{center}
+		\begin{tabular}{l|cccccc}
+			Position & 0 & 1 & 2 & 3 & 4 & 5 \\  \hline
+			Pattern & c & b & & & & a \\ \hline
+			Tabelle & -1 & 0 & -1 & 1 & 0 & 2
+		\end{tabular}
+	\end{center}
+
+	Wenden wir die Zyklenmethode an, dann lesen wir aus der Position 5 eine 2 aus, was uns sagt, dass die zwei Positionen davor mit dem Anfang des Patterns übereinstimmen müssen. Somit muss $\texttt{Pat[3] = Pat[0] = c}$ und $\texttt{Pat[4] = Pat[1] = b}$, also 
+	
+	\begin{center}
+		\begin{tabular}{l|cccccc}
+			Position & 0 & 1 & 2 & 3 & 4 & 5 \\  \hline
+			Pattern & c & b & & \textbf{c} & \textbf{b} & a \\ \hline
+			Tabelle & -1 & 0 & -1 & 1 & 0 & 2
+		\end{tabular}
+	\end{center}
+
+	Nun steht an Position 3 in der Tabelle eine 1, d.h. es muss einen 1-Zyklus vorher geben. Somit muss also die Position 2 mit dem Anfang übereinstimmen, ergo $\texttt{Pat[2] = Pat[0] = c}$
+	
+	\begin{center}
+		\begin{tabular}{l|cccccc}
+			Position & 0 & 1 & 2 & 3 & 4 & 5 \\  \hline
+			Pattern & c & b & \textbf{c} & \textbf{c} & \textbf{b} & a \\ \hline
+			Tabelle & -1 & 0 & -1 & 1 & 0 & 2
+		\end{tabular}
+	\end{center}
+
+	\pagebreak
+	
+	Schauen wir uns einmal die Zwei-Finger-Methode im Gegensatz dazu an.
+	An Position 5 steht eine 2 in der Tabelle, d.h. also wir müssen an der Stelle, wo der linke Finger auf der 2 stand, einen erfolgreichen Missmatch-Test durchgeführt haben, d.h. $\texttt{a} = \texttt{Pat[5]} \neq \texttt{Pat[2]}$ und es kommen nur noch die Buchstaben b und c für \texttt{Pat[2]} in Frage. An Position 2 steht eine -1, d.h. wir waren links davon nicht erfolgreich, weil entweder kein erfolgreicher Missmatch-Test vorlag oder aber die Parallelverschiebung nicht funktioniert hat. Angenommen wir hätten mit Position 1 keinen erfolgreichen Missmatch-Test, aber einen erfolgreichen mit \texttt{Pat[0]}, dann müsste $\texttt{Pat[2] = b}$ gelten. Dann hätten wir aber einen erfolgreichen Missmatch-Test und dementsprechend (weil wir schon am linken Rand sind) schon eine gültige Position und es sollte \texttt{Tab[2] = 0} gelten, was falsch ist (ist ja schon mit -1 gegeben). Also muss \texttt{Pat[2] = c} gelten. Warum passt das? Mit Position 1 ist der Missmatch-Test erfolgreich, beginnen wir mit der Parallelverschiebung, dann vergleichen wir \texttt{Pat[1]} mit \texttt{Pat[0]}, was falsch ist. Damit kann $\texttt{Tab[2]} \neq 1$, mit Position 0 schlägt schon der Missmatch-Test fehl, also muss auch $\texttt{Tab[2]} \neq 0$ gelten. Damit bleibt also nur noch -1, also passt das.
+	
+	\begin{center}
+		\begin{tabular}{l|cccccc}
+			Position & 0 & 1 & 2 & 3 & 4 & 5 \\  \hline
+			Pattern & c & b & \textbf{c} & & & a \\ \hline
+			Tabelle & -1 & 0 & -1 & 1 & 0 & 2
+		\end{tabular}
+	\end{center}
+
+	Machen wir weiter mit Position 3. Wir müssen einmal weiter hinten schauen und lesen in der Tabelle an Position 5 eine 2 aus. Dementsprechend muss der Missmatch zwischen Position 5 und Position 2 vorliegen, was aber eher unwichtig ist. Viel wichtiger ist, dass die beiden Positionen links der 5 und links der 2 übereinstimmen müssen, damit während der Parallelverschiebung Matches auftreten. Somit muss also $\texttt{Pat[4] = Pat[1] = b}$ und $\texttt{Pat[3] = Pat[0] = c}$ gelten, sodass wir unsere beiden übrigen Plätze aufgefüllt haben.
+	
+	\begin{center}
+		\begin{tabular}{l|cccccc}
+			Position & 0 & 1 & 2 & 3 & 4 & 5 \\  \hline
+			Pattern & c & b & \textbf{c} & \textbf{c} & \textbf{b} & a \\ \hline
+			Tabelle & -1 & 0 & -1 & 1 & 0 & 2
+		\end{tabular}
+	\end{center}
+
+	\vspace{15em}
+	\textit{Alle Angaben wie immmer ohne Garantie.}
+\end{document}
