@@ -30,17 +30,10 @@ Weitere Informationen findet ihr auch auf der Lehrveranstaltungswebsite.
 
 ## Weitere Materialien
 * [CheatSheet Linux-Terminal](https://www.cheatography.com/davechild/cheat-sheets/linux-command-line/pdf/)
-* 
+*
 
 
 
 ## Kontakt
 * Eric Kunze
 * Mail: [eric.kunze@mailbox.tu-dresden.de](eric.kunze@mailbox.tu-dresden.de)
-
-Sollten dingende Fragen auftauchen, dann ist es wahrscheinlich mich an folgenden Tagen und Orten anzutreffen (aber nicht garantiert):
-* Montag, 14:00 - 16:30 im APB vor Raum 3077
-* Dienstag, 14:00 - 18:00 im Willersbau, B-Flügel, 3. Etage
-* Mittwoch, 9:00 - 11:00 im Willersbau, B-Flügel, 3. Etage
-* Donnerstag, 9:00 - 11:00 im Willersbau, B-Flügel, 3. Etage
-* Donnerstag, 13:00 - 14:30 im Willersbau, C-Flügel, Keller
