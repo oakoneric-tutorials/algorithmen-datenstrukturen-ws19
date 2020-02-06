@@ -1,0 +1,393 @@
+% This work is licensed under the Creative Commons
+% Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy
+% of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/ or
+% send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+% (c) Eric Kunze, 2019
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for lecture notes and exercises at TU Dresden.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[ngerman, a4paper, 12pt]{article}
+
+\usepackage[ngerman]{babel}
+\RequirePackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\RequirePackage{parskip}  	% split paragraphs by vspace instead of intendations
+\RequirePackage[onehalfspacing]{setspace} % increase row-space
+\RequirePackage[title,titletoc]{appendix}
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{chngcntr}
+\RequirePackage{eufrak}
+
+\RequirePackage{lmodern}
+\RequirePackage{ulem} 
+
+\usepackage{fancyhdr} 	% customize header / footer
+\usepackage{tocloft}
+%\renewcommand{\cfttoctitlefont}{\titlefont\Huge\bfseries}
+%\renewcommand{\cftbeforetoctitleskip}{0pt}
+%\renewcommand{\cftchapnumwidth}{2em}
+%\renewcommand{\cftsecindent}{2em}
+%\renewcommand{\cftsecnumwidth}{2em}
+%\renewcommand{\cftsubsecindent}{4em}
+
+\RequirePackage{amsmath,amssymb,amsfonts,mathtools}
+\RequirePackage{blkarray}
+\RequirePackage{latexsym}
+\RequirePackage{marvosym} 	% lightning (contradiction)
+\RequirePackage{stmaryrd} 	% Lightning symbol
+\RequirePackage{bbm} 		% unitary matrix
+\RequirePackage{wasysym}	% add some symbols
+
+\RequirePackage{systeme}	% easy typesetting systems of equations
+\RequirePackage{witharrows} % arrows from one equation to another
+
+% further support for different equation setting
+\RequirePackage{cancel}
+\RequirePackage{xfrac}		% sfrac -> fractions e.g. 3/4
+\RequirePackage{units}		% units and fractions
+\RequirePackage{diagbox}
+
+
+\usepackage{../mathoperatorsAuD}
+
+\RequirePackage[table,dvipsnames]{tudscrcolor}
+\RequirePackage{tabularx} 	% tabularx-environment (explicitly set width of columns)
+\RequirePackage{longtable} 	% Tabellen mit Seitenumbrüchen
+\RequirePackage{multirow}
+\RequirePackage{booktabs}	% improved rules
+\RequirePackage{colortbl}
+
+\newcommand{\begriff}[1]{\textbf{#1}}
+\newcommand{\person}[1]{\textsc{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                             COUNTER                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pretocmd{\chapter}{\setcounter{section}{0}}{}{}
+\pretocmd{\chapter}{\setcounter{equation}{0}}{}{}
+
+\usepackage{enumerate}
+\usepackage[inline]{enumitem} 		%customize label
+
+\renewcommand{\labelitemi}{\raisebox{2pt}{\scalebox{.4}{$\blacksquare$}}}
+\renewcommand{\labelitemii}{$\vartriangleright$}
+\renewcommand{\labelitemiii}{--}
+% Variantionen des Dreiecks als Aufzählungszeichen $\blacktriangleright$ / $\vartriangleright$ / $\triangleright$
+
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+\renewcommand{\labelenumii}{\alph{enumii}.}
+\renewcommand{\labelenumiii}{\roman{enumiii}.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}   % change title headings look
+\usepackage{chngcntr}   % modify counters
+\usepackage{relsize}    % relative font size (smaller[i], larger[i], ...)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% headings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\titlefont}{\osfamily}
+\newcommand{\chaptersize}{\huge}
+\newcommand{\sectionsize}{\LARGE}
+
+\renewcommand{\thepart}{\Alph{part}}
+
+% \titleformat{<command>}[<shape>]{<format>}{<label>}{<sep>}{<before-code>}[<after-code>]
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}[<right-sep>]
+
+%%%%%%%%% section
+%\titlelabel{\thetitle \quad} % no "." behind section/sub... (3 instead of 3.)
+\titleformat{\section}[hang]{\bfseries\LARGE}{\thesection}{8pt}{}%
+%\titleformat*{\section}{\bfseries\titlefont\sectionsize}
+%\titleformat*{\subsection}{\bfseries\titlefont\sectionsize\smaller}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                           REFERENCES                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{titlesec}   % change title headings look
+\usepackage{relsize}    % relative font size (smaller[i], larger[i], ...)
+
+\usepackage{titling}
+%\pretitle{\begin{center}\Huge\bfseries\sffamily}
+%\posttitle{\par}
+%\preauthor{\par \normalfont \large \scshape}
+%\postauthor{\par}
+%\postdate{\end{center}
+
+\DeclareMathSymbol{*}{\mathbin}{symbols}{"01}
+
+\counterwithin{equation}{section}
+\newcounter{themcount}
+\counterwithin{themcount}{section}
+%\RequirePackage{amsmath,amssymb,amsfonts,mathtools}
+\RequirePackage[amsmath,thmmarks,framed]{ntheorem}
+
+\usepackage[
+type={CC},
+modifier={by-nc-sa},
+version={4.0},
+]{doclicense}
+
+\RequirePackage[unicode,bookmarks=true]{hyperref}
+\hypersetup{
+	% pdfborder={0 0 0}			% no boxed around links
+	pdfborderstyle={/S/U/W 1},	% underlining insteas of boxes
+	linkbordercolor=cdblue,
+	urlbordercolor=cdblue
+	%	colorlinks,
+	%	citecolor=black,
+	%	filecolor=cddarkblue!80,
+	%	linkcolor=black,
+	%	urlcolor=cddarkblue!80
+}
+
+\DeclareMathOperator{\yield}{yield}
+\DeclareMathOperator{\win}{Gewinn}
+\DeclareMathOperator{\nowin}{kein Gewinn}
+\DeclareMathOperator{\rfe}{rfe}
+
+\newlength{\labellength}
+\settowidth{\labellength}{(a)}
+%\addtolength{\labellength}{1em}
+
+\RequirePackage{bookmark}		% pdf-bookmarks
+
+
+\begin{document}
+	\title{\bfseries \sffamily \huge EM-Algorithmus}
+	\author{\scshape Eric Kunze}
+	\date{\today}
+	\maketitle
+	{ \footnotesize \doclicenseThis }
+	
+	\begin{center}
+		\small \slshape Mit dieser Lösung ist keine Garantie auf Vollständigkeit und/oder Korrektheit verbunden!
+	\end{center}
+	
+	\section*{Aufgabe 1}
+	Wir betrachten den Wurf zweier Münzen, wobei die erste Münze auch auf dem Rand landen kann. Dementsprechend gibt es für die erste Münze die Möglichkeiten $\menge{K,Z,R}$, für die zweite \enquote{normale} Münze nur die Möglichkeiten $\menge{K,Z}$. Insgesamt gibt es also die Möglichkeiten
+	\begin{equation*}
+	X \defeq \menge{K,Z,R} \times \menge{K,Z} = \menge{(K,K), (K,Z), (Z,K), (Z,Z), (R,K), (R,Z)}
+	\end{equation*}
+	Wir gewinnen ein Spiel, wenn beide Münzen gleich landen.
+	
+\begin{enumerate}[label=(\alph*), leftmargin=0pt]
+	\item
+	Gesucht ist nun der Analysator für dieses Spiel. In der Vorlesung wurde eine Beobachtungsfunktion
+	\begin{equation*}
+		\abb{\yield}{X}{\menge{\win, \nowin}}
+	\end{equation*} 
+	eingeführt, die jedem Ergebnis der Ergebnismenge eine Beobachtung zuordnet, d.h. ob man bei einem Ergebnis gewinnt oder nicht. Beispielsweise ist $\yield(K,K) = \win$ aber $\yield(R,Z) = \nowin$.
+	Da wird nun aber nicht den konkreten Ausgang des Spiels erfahren, sondern nur die Beobachtung, ob gewonnen wurde oder nicht, benötigen wir alle Ergebnisse, die zu dieser Beobachtung geführt haben könnten. Das wird mathematisch gesehen das Urbild einer Beobachtung unter der $\yield$-Abbildung. Dieses definiert uns eine neue Abbildung 
+	\begin{equation*}
+		\abb{A}{\menge{\win, \nowin}}{\pows{X}}
+	\end{equation*} 
+	die wir \begriff{Analysator} nennen. Der Analysator liefert also für eine gegebene Beobachtung die Menge der zugehörigen Ergebnisse.
+	Somit ist also
+	\begin{equation*}
+		\begin{aligned}
+		A(\win) &= \menge{x \in X: \yield(x) = \win} = \menge{(K,K), (Z,Z)} \\
+		A(\nowin) &= \menge{x \in X: \yield(x) = \nowin} = \menge{(K,Z), (Z,K),(R,K),(R,Z)}
+		\end{aligned}
+	\end{equation*}
+	
+	\item
+	Nun können wir nicht mehr den Korpus über $X$ betrachten, weil wir kennen nicht mehr die exakten Ergebnisse, sondern wir müssen auf den Korpus über $Y \defeq \menge{\win, \nowin}$ ausweichen. Das nennt man dann Korpus mit unvollständigen Daten (weil wir eben nicht mehr alles wissen).
+	
+	Wir spielen das Spiel $24$ Mal und gewinnen $6$ Mal. Gesucht ist nun der $Y$-Korpus $h$, d.h. wie oft beobachten wir die Ereignisse $\win$ und $\nowin$.
+	\begin{equation*}
+		h(\win) = 6 \qquad\qquad h(\nowin) = 18
+	\end{equation*}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\item 
+	Gegeben ist nun eine initiale Wahrscheinlichkeitsverteilung $q_0 = q_0^1 \times q_0^2$ über den vollständigen Daten mit
+	\begin{align*}
+		q_0^1(K) &= \frac{2}{5} & q_0^2(K) &= \frac{1}{3} \\
+		q_0^1(R) &= \frac{1}{5} 
+	\end{align*}
+	Diese Verteilung können wir nun noch ergänzen, da sich die Wahrscheinlichkeiten zu $1$ aufaddieren müssen. Somit ist also
+	\begin{equation*} 
+		\begin{aligned}
+			q_0^1(K) + q_0^1(R) + q_0^1(Z) = 1 &\follows q_0^1(Z) = 1 - q_0^1(K) - q_0^1(R) = 1 - \frac{2}{5} - \frac{1}{5} = \frac{2}{5} \\
+			q_0^2(K) + q_0^2(Z) = 1 &\follows q_0^2(Z) = 1 - q_0^1(K) = 1 - \frac{1}{3} = \frac{2}{3}
+		\end{aligned}
+	\end{equation*}
+	Nun können wir das unabhängige Produkt nutzen. Dieses ist ungefähr das, was man aus der Schule als Pfadregel kennt, wo man entlang eines Pfades multipliziert.
+	Damit erhalten wir dann
+	\begin{align*}
+		q_0(K,K) &= q_0^1(K) * q_0^2(K) = \frac{2}{5} * \frac{1}{3} = \frac{2}{15} 
+		& q_0(K,Z) &= q_0^1(K) * q_0^2(Z) = \frac{2}{5} * \frac{2}{3} = \frac{4}{15} \\
+		q_0(Z,K) &= q_0^1(Z) * q_0^2(K) = \frac{2}{5} * \frac{1}{3} = \frac{2}{15}
+		& q_0(Z,Z) &= q_0^1(Z) * q_0^2(Z) = \frac{2}{5} * \frac{2}{3} = \frac{4}{15} \\
+		q_0(R,K) &= q_0^1(R) * q_0^2(K) = \frac{1}{5} * \frac{1}{3} = \frac{1}{15}
+		& q_0(R,Z) &= q_0^1(R) * q_0^2(Z) = \frac{1}{5} * \frac{2}{3} = \frac{2}{15}
+	\end{align*}
+	
+	Im E-Schritt des EM-Algorithmus muss nun der Korpus $h$ zu einem Korpus $h_1$ erweitert werden. Dies geschieht mit folgender Formel:
+	\begin{equation*}
+		h_1(x) = h(\yield(x)) * \frac{q_0(x)}{\sum\limits_{x' \in A(\yield(x))} q_0(x')}
+	\end{equation*}
+	Das sieht jetzt zwar kompliziert aus, aber lässt sich relativ einfach vereinfachen bzw. einfacher lesen. Der Summationsbereich $A(\yield(x))$ besteht genau aus den Elementen, die die gleiche Beobachtung haben wie $x$, also zum Beispiel
+	\begin{equation*}
+		A(\yield(K,K)) = A(\win) = \menge{(K,K), (Z,Z)}
+	\end{equation*}
+	Der Vorfaktor $h(\yield(x))$ lässt sich auch relativ leicht berechnen, wir nehmen einfach die Beobachtung von $x$ und deren Korpus, d.h. zum Beispiel
+	\begin{equation*}
+		h(\yield(K,K)) = h(\win) = 6
+	\end{equation*}
+	Damit ergibt sich dann
+	\begin{align*}
+		h_1(K,K) &= h(\yield(K,K)) * \frac{q_0(K,K)}{\sum\limits_{x' \in A(\yield(K,K))} q_0(x')} \\
+		&= h(\win) * \frac{q_0(K,K)}{\sum\limits_{x' \in \menge{(K,K),(Z,Z)}} q_0(x')} \\
+		&= h(\win) * \frac{q_0(K,K)}{q_0(K,K) + q_0(Z,Z)} \\
+		&= 6 * \frac{\frac{2}{15}}{\frac{2}{15} + \frac{4}{15}} \\
+		&= 2
+	\end{align*}
+	Mit gleicher Rechnung erhält man für die restlichen Ereignisse
+	\begin{align*}
+		h_1(K,Z) &= 8 & h_1(Z,K) &= 4 & h_1(R,K) &= 2 \\
+				 &    & h_1(Z,Z) &= 4 & h_1(R,Z) &= 4
+	\end{align*}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\item
+	Nun führen wir noch den M-Schritt aus und bestimmen die Teilkorpora $h_1^1$ bzw. $h_1^2$ durch \begriff{Marginalisierung}:
+	\begin{equation*}
+		h_1^1(K) 
+		= \sum_{x \in \menge{K,Z}} h_1(K,x) 
+		= h_1(K,K) + h_1(K,Z)
+		= 2 + 8
+		= 10
+	\end{equation*}
+	Effektiv addiert man also die Korpora, wo $K$ in der \textit{ersten} Komponenten vorkommt. Schließlich erhält man $h_1^1$ vollständig mit
+	\begin{equation*}
+		h_1^1(K) = 10 \qquad h_1^1(Z) = 8 \qquad h_1^1(R) = 6
+	\end{equation*}
+	Für $h_1^2$ erhält man
+	\begin{equation*}
+	\setlength{\arraycolsep}{1pt}
+	\begin{array}{ccccccccc}
+		h_1^2(K) 
+		&=& \sum\limits_{x \in \menge{K,Z,R}} h_1(x,K) 
+		&=& h_1(K,K) + h_1(Z,K) + h_1(R,K)
+		&=& 2 + 4 + 2
+		&=& 8 \\
+		h_1^2(Z)
+		&=& \sum\limits_{x \in \menge{K,Z,R}} h_1(x,Z)
+		&=& h_1(K,Z) + h_1(Z,Z) + h_1(R,Z)
+		&=& 8 + 4 + 4
+		&=& 16
+	\end{array}
+	\end{equation*}
+	wobei man wiederum die Korpora addiert, wo $K$ in der \textit{zweiten} Komponenten vorkommt.
+	Damit sind $h_1^1$ und $h_1^2$ vollständig bestimmt. 
+	Man kann die Marginalisierung auch in Matrixschreibweise nachvollziehen, was auch ein bisschen übersichtlicher ist:
+	\begin{equation*}
+		\begin{array}{|c||cc|c|}
+		\hline
+		X_1 \backslash X_2 & K & Z & \\ \hline \hline
+		K & h_1(K,K) & h_1(K,Z) & h_1^1(K) \\
+		Z & h_1(Z,K) & h_1(Z,Z) & h_1^1(Z) \\
+		R & h_1(R,K) & h_1(R,Z) & h_1^1(R) \\ \hline
+		  & h_1^2(K) & h_1^2(Z) & \\ \hline
+		\end{array}
+		\qquad \leadsto \qquad 
+		\begin{array}{|c||cc|c|}
+		\hline
+		X_1 \backslash X_2 & K & Z & \\ \hline \hline
+		K & 2 &  8 & 10 \\
+		Z & 4 &  4 &  8 \\
+		R & 2 &  4 &  6 \\ \hline
+	      & 8 & 16 & 24 \\ \hline
+		\end{array}
+	\end{equation*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\item 
+	Nun bestimmen wir noch die relativen Häufigkeiten mit der Formel
+	\begin{equation*}
+		\rfe(h)(x) \defeq \frac{h(x)}{\abs{h}} \quad \mit \quad \abs{h} \defeq \sum_{x \in X} h(x)
+	\end{equation*}
+	Wenden wir dies nun auf $h_1$ und $h_2$ an, so erhalten wir
+	\begin{align*}
+		q_1^1(K) = \rfe(h_1^1)(K) &= \frac{h_1^1(K)}{h_1^1(K) + h_1^1(Z) + h_1^1(R)} = \frac{10}{24} = \frac{5}{12} \\
+		q_1^1(Z) = \rfe(h_1^1)(Z) &= \frac{h_1^1(Z)}{h_1(K) + h_1^1(Z) + h_1^1(R)} = \frac{8}{24} = \frac{1}{3} \\
+		q_1^1(R) = \rfe(h_1^1)(R) &= \frac{h_1^1(R)}{h_1^1(K) + h_1^1(Z) + h_1^1(R)} = \frac{6}{24} = \frac{1}{4} \\
+		\intertext{und}
+		q_1^2(K) = \rfe(h_1^2)(K) &= \frac{h_1^2(K)}{h_1^2(K) + h_1^2(Z)} = \frac{8}{24} = \frac{1}{3} \\
+		q_1^2(Z) = \rfe(h_1^2)(Z) &= \frac{h_1^2(Z)}{h_1^2(K) + h_1^2(Z)} = \frac{16}{24} = \frac{2}{3} \\
+	\end{align*}
+\end{enumerate}	
+		
+\section*{Aufgabe 2}
+
+	Die Personen $A$ und $B$ spielen ein Spiel mit einer Münze mit den Beschriftungen $1$ und $2$, sowie mit einem dreiseitigen \enquote{Würfel} mit den Beschriftungen $1$, $2$, und $3$. In jeder Runde werden die
+	Münze und der Würfel geworfen. Der Spieler $A$ gewinnt die Runde, falls die gefallene Zahl des Würfels kleiner gleich der auf der Münze ist. Ansonsten gewinnt $B$ die Runde. Die Menge der möglichen Ergebnisse ist somit $X = \menge{1, 2} \times \menge{1,2,4}$.
+	 
+	\begin{enumerate}[label=(\alph*), leftmargin=0pt]
+		\item Gesucht ist der Analysator $A$ für dieses Szenario.
+		\begin{align*}
+			A( \text{\enquote{A gewinnt}}) &= \menge{(1,1), (2,1), (2,2)} \\
+			A( \text{\enquote{B gewinnt}}) &= \menge{(1,2), (1,3), (2,3)}			
+		\end{align*}
+		\item Der Korpus mit unvollständigen Daten ist gegeben durch
+		\begin{align*}
+			h(\text{\enquote{A gewinnt}}) &= 21 \\
+			h(\text{\enquote{B gewinnt}}) &= 10
+ 		\end{align*}
+ 		\item Gegeben ist eine initiale Wahrscheinlichkeitsverteilung $q_0 = q_0^M \times q_0^W$. Wir vervollständigen zuerst die Angaben von $q_0^M$ und $q_0^W$:
+ 		\begin{align*}
+ 			q_0^M(1) &= \frac{1}{3} & q_0^W(1) = \frac{1}{4} \\
+ 			q_0^M(2) &= \frac{2}{3} & q_0^W(2) = \frac{1}{2} \\
+ 			 		 &              & q_0^W(3) = \frac{1}{4} 
+ 		\end{align*}
+ 		Nun können wir $q_0$ als unabhängiges Produkt berechnen:
+ 		\begin{align*}
+ 			q_0(1,1) &= q_0^M(1) * q_0^W(1) = \frac{1}{3} * \frac{1}{4} = \frac{1}{12} &
+ 			q_0(2,1) &= q_0^M(2) * q_0^W(1) = \frac{2}{3} * \frac{1}{4} = \frac{1}{6} \\
+ 			q_0(1,2) &= q_0^M(1) * q_0^W(2) = \frac{1}{3} * \frac{1}{2} = \frac{1}{6} &
+ 			q_0(2,2) &= q_0^M(2) * q_0^W(2) = \frac{2}{3} * \frac{1}{2} = \frac{1}{3} \\
+ 			q_0(1,3) &= q_0^M(1) * q_0^W(3) = \frac{1}{3} * \frac{1}{4} = \frac{1}{12} &
+ 			q_0(2,3) &= q_0^M(2) * q_0^W(3) = \frac{2}{3} * \frac{1}{4} = \frac{1}{6}
+ 		\end{align*}
+ 		\item Wir führen den E-Schritt aus und Vervollständigen den Korpus $h$ zu einem Korpus $h_1$:
+ 		\begin{align*}
+ 			h_1(1,1) &= 3 & h_1(2,1) &= 6 \\
+ 			h_1(1,2) &= 4 & h_1(2,2) &= 12 \\
+ 			h_1(1,3) &= 2 & h_1(2,3) &= 4
+ 		\end{align*}
+ 		\item M-Schritt --- Wir bestimmen zuerst die Teilkorpora $h_1^M$ und $h_1^W$ durch Marginalisierung:
+ 		\begin{equation*}
+ 		\begin{array}{|c||ccc|c|}
+ 		\hline
+ 		M \backslash W & 1 & 2 & 3 &\\ \hline \hline
+ 		1 & h_1(1,1) & h_1(1,2) & h_1(1,3) & h_1^M(1) \\
+ 		2 & h_1(2,1) & h_1(2,2) & h_1(2,3) & h_1^M(2) \\ \hline
+ 		& h_1^W(1) & h_1^W(2) & h_1^W(3) & \\ \hline
+ 		\end{array}
+ 		\qquad \leadsto \qquad 
+ 		\begin{array}{|c||ccc|c|}
+ 		\hline
+ 		M \backslash W & 1 & 2 & 3 &\\ \hline \hline
+ 		1 & 3 & 4 & 2 & 9 \\
+ 		2 & 6 & 12 & 4 & 22 \\ \hline
+ 		  & 9 & 16 & 6 & \\ \hline
+ 		\end{array}
+ 		\end{equation*}
+ 		\item Wir schätzen nun die Wahrscheinlichkeitsverteilung $q_1^M$ und $q_1^W$ als relative Häufigkeit der Teilkorpora.
+	\end{enumerate}
+\end{document}
+
