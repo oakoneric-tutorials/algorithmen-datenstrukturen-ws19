@@ -30,7 +30,7 @@ Weitere Informationen findet ihr auch auf der Lehrveranstaltungswebsite.
 
 ## Weitere Materialien
 * [CheatSheet Linux-Terminal](https://www.cheatography.com/davechild/cheat-sheets/linux-command-line/pdf/)
-*
+* [Offizielle Lehrveranstaltungsevaluation](./Evaluation_UE8AlgorithmenundDatenstrukturen.pdf)
 
 
 
