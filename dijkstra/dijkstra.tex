@@ -77,7 +77,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\section{Algorithmus von \person{Dijkstra}}
+\section{Algorithmus von \person{Dijkstra}}
 
 \begin{frame} \frametitle{Setting \cite{vogler}}
 	\textbf{gegeben:} 
@@ -215,6 +215,53 @@
 		&          &   &           &                   &                    & \uline{\alert{13}} \\
 		\hline
 	\end{tabular}
+\end{frame}
+
+\section{Algorithmus von \person{Ford}-\person{Moore}}
+
+\begin{frame} \frametitle{Setting \cite{martinovic}}
+	\textbf{gegeben:}
+	\begin{itemize}
+		\item gerichteter, gewichteter Graph $G = (V,E,c)$ mit 
+		\begin{itemize}
+			\item $V = \menge{1, \dots, n}$
+			\item \textit{beliebiger} Funktion $\abb{c}{E}{\R}$ (auch negative Gewichte)
+		\end{itemize}
+		\item Startknoten $s \in V$
+	\end{itemize}
+
+	\textbf{gesucht:}
+	\begin{itemize}
+		\item \textit{längste} Wege von $s \in V$ zu allen anderen Knoten
+	\end{itemize}
+
+	\textbf{naive Idee:}
+	\begin{itemize}
+		\item Dijkstra-Algorithmus für $G' = (V,E,-c)$
+		\item Problem: negative Kantengewichte nicht zulässig
+		\item Ausweg: Algorithmus von \person{Ford} \& \person{Moore}
+	\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Der Algorithmus}
+	\fbox{\textbf{Algorithmus von \person{Ford}/\person{Moore}:}}
+	\begin{enumerate}
+		\item Wähle $s \in V$ als Startknoten und setze $d(s) = 0$, sowie
+		\begin{equation*}
+		p(v) \defeq \begin{cases}
+		s & (s,v) \in E \\ 0 & \text{sonst}
+		\end{cases} 
+		\qquad
+		d(v) \defeq \begin{cases}
+		c(s,v) & (s,v) \in E \\ -\infty &\text{sonst}
+		\end{cases}
+		\end{equation*}
+		für alle $s \neq v$. Definiere außerdem $A \defeq \menge{s} \cup \menge{v \in V: (s,v) \in E}$, $B \defeq \emptyset$ und $k \defeq 1$.
+		%
+		\item Falls $A = \emptyset$ oder $k = \card{V}$, dann \texttt{STOP}.
+		\item Für alle $u \in A$ und alle $v \in V$ mit $(u,v) \in E$: falls $d(v) < d(u) + c(u,v)$, dann setze $d(v) = d(u) + c(u,v)$ und $p(v) = u$ sowie $B \defeq B \cup \menge{v}$.
+		\item Setze $A = B$, $B = \emptyset$, $k \defeq k+1$ und gehe zu Schritt 1.
+	\end{enumerate}
 \end{frame}
 
 \begin{frame} \frametitle{Literatur}
